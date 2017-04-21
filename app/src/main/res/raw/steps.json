@@ -1,0 +1,26 @@
+[
+   {
+     "title": "起始",
+     "description": "step 1"
+   },
+   {
+        "title": "清洗",
+        "description": "step 2"
+   },
+   {
+        "title": "培養1",
+        "description": "step 3"
+   },
+   {
+        "title": "培養2",
+        "description": "step 4"
+   },
+   {
+        "title": "收成",
+        "description": "step 5"
+   },
+   {
+       "title": "清洗",
+       "description": "step 6"
+   }
+ ]

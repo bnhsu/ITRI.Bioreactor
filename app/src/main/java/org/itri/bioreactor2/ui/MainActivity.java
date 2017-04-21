@@ -1,9 +1,12 @@
-package org.itri.bioreactor2;
+package org.itri.bioreactor2.ui;
 
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.itri.bioreactor2.R;
+import org.itri.bioreactor2.ui.fragment.AllSettingFragment;
+import org.itri.bioreactor2.ui.fragment.AutoUIFragment;
+import org.itri.bioreactor2.ui.fragment.ChartFragment;
+import org.itri.bioreactor2.ui.fragment.TabFragment;
 import org.itri.bioreactor2.ui.tools.tappager.SlidingTabLayout;
 import org.itri.bioreactor2.ui.tools.tappager.TabsPagerAdapter;
 
@@ -34,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
     private android.support.design.widget.TabLayout mTabs;
 
     private ViewPager mViewPager;
-    private SlidingTabLayout mSlidingTabLayout;
-    private TabsPagerAdapter mAdapter;
+//    private SlidingTabLayout mSlidingTabLayout;
+//    private TabsPagerAdapter mAdapter;
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+//    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private int[] headResource = { R.drawable.sidemeun_cover01,
             R.drawable.sidemeun_cover02, R.drawable.sidemeun_cover03,
@@ -101,25 +109,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViewPager(){
-/*
-        String[] titles = {
-                getString(R.string.main_tab_monitor),
-                getString(R.string.main_tab_history),
-                getString(R.string.main_tab_preference)
-                //"流程測試"
-        };
-*/
-
-        mTabs = (android.support.design.widget.TabLayout) findViewById(R.id.tabs);
-        mTabs.addTab(mTabs.newTab().setText(getString(R.string.main_tab_monitor)));
-        mTabs.addTab(mTabs.newTab().setText(getString(R.string.main_tab_history)));
-        mTabs.addTab(mTabs.newTab().setText(getString(R.string.main_tab_preference)));
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new ViewPagerAdapter());
+        mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        mTabs = (TabLayout) findViewById(R.id.tabs);
+        mTabs.setupWithViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabs));
-
-
 /*
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         //mAdapter = new TabsPagerAdapter(getSupportFragmentManager(),fragments,titles);
@@ -130,24 +125,48 @@ public class MainActivity extends AppCompatActivity {
 */
     }
 
-    private class ViewPagerAdapter extends PagerAdapter {
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        private final String[] tabTitles = {
+                getString(R.string.main_tab_monitor),
+                getString(R.string.main_tab_history),
+                getString(R.string.main_tab_preference)
+                //"流程測試"
+        };
+        private Fragment[] fragments = {
+                //new MonitorFragment(),
+                new AutoUIFragment(),
+                new ChartFragment(),
+                new AllSettingFragment()
+        };
+
+        public ViewPagerAdapter(FragmentManager fm){
+            super(fm);
+        }
+
 
         @Override
         public int getCount() {
-            return 3;
+            return tabTitles.length;
         }
 
+        @Override
+        public Fragment getItem(int position) {
+            //return TabFragment.newInstance(position);
+            return fragments[position];
+        }
+/*
         @Override
         public boolean isViewFromObject(View view, Object o) {
             return o == view;
         }
-
+*/
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Item " + (position + 1);
+            return tabTitles[position];
         }
 
-
+/*
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = getLayoutInflater().inflate(R.layout.pager_item,
@@ -160,9 +179,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
-        }
 
+        }
+ */
     }
+
 
 
     public boolean onCreateOptionsMenu(Menu menu) {

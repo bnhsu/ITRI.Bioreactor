@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    class="org.itri.bioreactor.ui.component.uiActuator"
+    android:layout_width="220dp"
+    android:layout_height="140dp"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="62dp"
+        android:layout_height="72dp"
+        android:src="@drawable/do_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp" />
+
+    <TextView
+        android:text="％"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_sensor_unit"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginEnd="31dp"
+        android:layout_alignBaseline="@+id/text_sensor_value"
+        android:layout_alignBottom="@+id/text_sensor_value"
+        android:layout_alignEnd="@+id/text_sensor_Error" />
+
+    <TextView
+        android:text="Error"
+        android:visibility="invisible"
+        android:layout_height="36dp"
+        android:id="@+id/text_sensor_Error"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_width="200dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="---"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_sensor_value"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp" />
+</RelativeLayout>

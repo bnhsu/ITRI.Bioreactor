@@ -1,4 +1,4 @@
-package org.itri.bioreactor2;
+package org.itri.bioreactor2.ui;
 
 import android.app.Activity;
 import android.app.SearchManager;

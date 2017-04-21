@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    class="org.itri.bioreactor.ui.component.uiActuator"
+    android:layout_width="250dp"
+    android:layout_height="180dp"
+    >
+
+
+    <ImageView
+        android:id="@+id/img_stepmotor"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:src="@drawable/stepmoter_icon"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="STEP MOTOR"
+        android:id="@+id/text_sensor_title"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btn_pr180"
+        android:background="@drawable/flipdown_icon"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btn_nr180"
+        android:background="@drawable/flipup_icon"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/btn_pr180" />
+
+</RelativeLayout>

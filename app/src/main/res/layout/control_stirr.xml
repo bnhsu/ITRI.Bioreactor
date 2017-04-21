@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    class="org.itri.bioreactor.ui.component.uiActuator"
+    android:layout_width="320dp"
+    android:layout_height="450dp"
+    >
+
+    <ImageView
+        android:src="@drawable/stir_background"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:id="@+id/imageView" />
+
+    <TextView
+        android:text="STIR"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:id="@+id/text_sensor_title"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btn_inc"
+        android:background="@drawable/plus_icon"
+        android:layout_below="@+id/text_sensor_value"
+        android:layout_toEndOf="@+id/text_sensor_unit" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btn_dec"
+        android:background="@drawable/minus_icon"
+        android:layout_marginStart="21dp"
+        android:layout_alignBottom="@+id/stir_ui"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="---"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_sensor_value"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/text_sensor_title"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="125dp"
+        android:src="@drawable/stirrer"
+        android:id="@+id/img_stirrer"
+        android:adjustViewBounds="true"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp" />
+
+    <TextView
+            android:text="rmp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_sensor_unit"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+        android:layout_alignTop="@+id/text_sensor_value"
+        android:layout_toEndOf="@+id/text_sensor_title"
+         />
+
+    <ImageView
+        android:id="@+id/stir_ui"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:src="@drawable/stir_icon"
+        android:layout_alignBottom="@+id/btn_inc"
+        android:layout_alignStart="@+id/img_stirrer" />
+
+</RelativeLayout>

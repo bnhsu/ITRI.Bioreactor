@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsv="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="70dp"
+        android:layout_height="62dp"
+        android:src="@drawable/blanket_icon" />
+
+    <SeekBar
+        android:id="@+id/SeekBarHeating"
+        style="@android:style/Widget.Material.Light.SeekBar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:max="10"
+        android:progress="0"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageView3"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:id="@+id/textViewHeating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="HEAT LEVEL:"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:visibility="visible"
+        android:layout_marginStart="29dp"
+        android:layout_below="@+id/SeekBarHeating"
+        android:layout_alignStart="@+id/SeekBarHeating" />
+
+</RelativeLayout>

@@ -1,0 +1,28 @@
+[
+   {
+     "title": "Step 1",
+     "description":" Start",
+     "setTo":
+     {
+
+       "pH": "7"
+     },
+     "endIf":
+     {
+       "TIME": "40000"
+     }
+   },
+  {
+    "title": "Step 2",
+    "description":" end",
+    "setTo":
+    {
+      "pH": "0"
+    },
+    "endIf":
+    {
+      "TIME": "40000"
+    }
+  }
+
+ ]

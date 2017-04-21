@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scrollView"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="15"
+    android:background="@android:color/white">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <View
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="0px"
+                android:layout_height="0px" />
+        <!--
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="基本資料"
+            style="@style/SettingTitleStyle"
+            />
+
+        <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/tableLayout"
+                android:layout_weight="14"
+                android:layout_height="fill_parent"
+                android:weightSum="9"
+                android:background="@android:color/white">
+
+            <TableRow
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/textName"
+                    android:text="@string/profile_username"
+                    android:layout_column="0"
+                    style="@style/SettingLabelStyle"/>
+                <EditText
+                    android:id="@+id/editName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/textName"
+                    android:ems="8" android:layout_column="1"
+                    android:ellipsize="none"
+                    android:enabled="true"
+                    style="@style/SettingValueStyle" />
+            </TableRow>
+
+            <TableRow
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/textCode"
+                    android:text="代號"
+                    android:layout_column="0"
+                    style="@style/SettingLabelStyle"/>
+                <EditText
+                    android:id="@+id/editCode"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/textName"
+                    android:ems="8" android:layout_column="1"
+                    android:ellipsize="none"
+                    android:enabled="true"
+                    style="@style/SettingValueStyle"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:id="@+id/textPhone"
+                        android:layout_alignRight="@+id/textName"
+                        android:layout_alignTop="@+id/textName"
+                        android:text="@string/profile_userphone"
+                        style="@style/SettingLabelStyle"
+                        android:layout_column="0"
+                        />
+
+                <EditText
+                    android:id="@+id/editPhone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textPhone"
+                    android:layout_alignLeft="@+id/editName"
+                    android:ems="10"
+                    android:inputType="number|numberDecimal" android:layout_column="1"
+                    style="@style/SettingValueStyle">
+                </EditText>
+            </TableRow>
+
+            <TableRow
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/textHeight"
+                    android:layout_alignLeft="@+id/textName"
+                    android:layout_below="@+id/editPhone"
+                    android:text="@string/profile_height"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                 />
+                <EditText
+                    android:id="@+id/editHeight"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textHeight"
+                    android:layout_alignLeft="@+id/editName"
+                    android:ems="10"
+                    android:inputType="number|numberDecimal" android:layout_column="1"
+                    style="@style/SettingValueStyle">
+
+                </EditText>
+            </TableRow>
+
+            <TableRow
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/textWeight"
+                    android:layout_alignLeft="@+id/textName"
+                    android:layout_below="@+id/editHeight"
+                    android:text="@string/profile_weight"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                 />
+                <EditText
+                    android:id="@+id/editWeight"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textHeight"
+                    android:layout_alignLeft="@+id/editName"
+                    android:ems="10"
+                    android:inputType="number|numberDecimal" android:layout_column="1"
+                    style="@style/SettingValueStyle">
+
+                </EditText>
+            </TableRow>
+
+
+
+            <TableRow
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/textEMail"
+                    android:layout_alignLeft="@+id/textName"
+                    android:layout_below="@+id/editWeight"
+                    android:text="@string/profile_email"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                 />
+                <EditText
+                    android:id="@+id/editEmail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textWeight"
+                    android:layout_alignLeft="@+id/editName"
+                    android:ems="10"
+                    android:layout_column="1"
+                    style="@style/SettingValueStyle">
+
+                </EditText>
+            </TableRow>
+
+            <TableRow
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/textContactName"
+                    android:layout_alignLeft="@+id/textName"
+                    android:layout_below="@+id/editEMail"
+                    android:text="@string/profile_contact_name"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                 />
+                <EditText
+                    android:id="@+id/editContactName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textEMail"
+                    android:layout_alignLeft="@+id/editName"
+                    android:ems="10"
+                    android:layout_column="1"
+                    style="@style/SettingValueStyle">
+
+                </EditText>
+            </TableRow>
+
+            <TableRow
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                    android:id="@+id/textContactPhone"
+                    android:layout_alignLeft="@+id/textName"
+                    android:layout_below="@+id/editContactName"
+                    android:text="@string/profile_contact_phone"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                 />
+                <EditText
+                    android:id="@+id/editContactPhone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textContactName"
+                    android:layout_alignLeft="@+id/editName"
+                    android:ems="10"
+                    android:inputType="number|numberDecimal" android:layout_column="1"
+                    style="@style/SettingValueStyle">
+
+                </EditText>
+            </TableRow>
+
+
+
+
+            <TableRow
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:visibility="invisible" >
+                <TextView
+                    android:id="@+id/textBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/textName"
+                    android:layout_below="@+id/radioGender"
+                    android:text="Birthday"
+                    android:textAppearance="?android:attr/textAppearanceLarge" android:layout_column="0"
+                        />
+                <EditText
+                    android:id="@+id/editBirth"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textBirth"
+                    android:layout_alignBottom="@+id/textBirth"
+                    android:layout_alignLeft="@+id/radioGender"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:focusable="false" android:layout_column="1"
+                    style="@style/SettingValueStyle"/>
+            </TableRow>
+
+        </TableLayout>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="警示設定"
+                style="@style/SettingTitleStyle"
+         />
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/tableLayout2"
+            android:layout_weight="14"
+            android:layout_height="fill_parent"
+            android:weightSum="9"
+            android:background="@android:color/white" >
+
+            <TableRow
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+
+                <TextView
+                    android:text="@string/alarm_o2autolevel"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                    />
+
+                <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/o2autolevel"
+                android:layout_column="1"
+                    android:layout_gravity="center_horizontal"
+                    android:checked="false" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+
+                <TextView
+                    android:text="@string/alarm_o2autoAlarm"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                    />
+
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/o2autoAlarm"
+                    android:layout_column="1"
+                    android:layout_gravity="center_horizontal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:text="@string/alarm_spo2_margin_up"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                    />
+
+                <EditText
+                    android:id="@+id/alarm_spo2_margin_up"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/textName"
+                    android:ems="8" android:layout_column="1"
+                    android:ellipsize="none"
+                    android:enabled="true"
+                    style="@style/SettingValueStyle"
+                    android:inputType="number|numberDecimal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:text="@string/alarm_spo2_margin_down"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                     />
+
+                <EditText
+                    android:id="@+id/alarm_spo2_margin_down"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/textView"
+                    android:ems="8"
+                    android:ellipsize="none"
+                    android:enabled="true"
+                    android:inputType="number|numberDecimal"
+                    android:layout_column="1"
+                    style="@style/SettingValueStyle" />
+            </TableRow>
+
+            <TableRow
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:text="@string/alarm_heartrate_margin_top"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0" />
+
+                <EditText
+                    android:id="@+id/alarm_heartrate_margin_top"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView2"
+                    android:layout_alignLeft="@+id/editText"
+                    android:ems="10"
+                    android:inputType="number|numberDecimal"
+                    android:layout_column="1"
+                    style="@style/SettingValueStyle" />
+            </TableRow>
+
+            <TableRow
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:text="@string/alarm_heartrate_margin_bottom"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0" />
+
+                <EditText
+                    android:id="@+id/alarm_heartrate_margin_bottom"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView3"
+                    android:layout_alignLeft="@+id/editText"
+                    android:ems="10"
+                    android:inputType="number|numberDecimal"
+                    android:layout_column="1"
+                    style="@style/SettingValueStyle" />
+            </TableRow>
+
+            <TableRow
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:text="@string/alarm_pre_record_message"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                     />
+
+                <EditText
+                    android:id="@+id/alarm_pre_record_message"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_column="1"
+                    android:singleLine="false"
+                    android:maxLines="3"
+                    android:lines="2"
+                    style="@style/SettingValueStyle" />
+            </TableRow>
+            <TableRow
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+                <TextView
+                    android:id="@+id/textRecorder"
+                    android:text="@string/alarm_pre_record_audio"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                    />
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/switchToggleRecord"
+                    android:layout_column="1"
+                    android:layout_gravity="center_horizontal"
+                    android:checked="false" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/record_buttons_row"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+                <Button
+                    android:id="@+id/button_clear"
+                    android:text="Clear"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    android:layout_column="0"
+                    style="@style/ButtonStyle"/>
+
+                <LinearLayout
+                    android:layout_column="1"
+                    android:orientation="horizontal">
+                <Button
+                    android:id="@+id/button_play"
+                    android:text="Play"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    style="@style/ButtonStyle"/>
+
+                <Button
+                    android:id="@+id/button_record"
+                    android:text="Record"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                     style="@style/ButtonStyle"/>
+                </LinearLayout>
+
+            </TableRow>
+        </TableLayout>
+      -->
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="設備綁定"
+                style="@style/SettingTitleStyle"
+         />
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="14"
+                android:layout_height="fill_parent"
+                android:weightSum="9"
+                android:background="@android:color/white" >
+
+            <TableRow
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:id="@+id/lbBioreactor"
+                    android:text="生物反應器"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0"
+                    />
+
+                <EditText
+                    android:id="@+id/editBioreactor"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/textView"
+                    android:ems="8"
+                    android:ellipsize="none"
+                    android:enabled="true"
+                    android:inputType="number|numberDecimal"
+                    android:layout_column="1"
+                    style="@style/SettingValueStyle"
+                    android:editable="false"
+                    android:focusable="false"/>
+            </TableRow>
+
+                <!--
+            <TableRow
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:id="@+id/lbO2Spply"
+                    android:text="氧氣供給機"
+                    style="@style/SettingLabelStyle"
+                    android:layout_column="0" />
+
+                <EditText
+                    android:id="@+id/txO2Spply"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView2"
+                    android:layout_alignLeft="@+id/editText"
+                    android:ems="10"
+                    android:inputType="number|numberDecimal"
+                    android:layout_column="1"
+                    style="@style/SettingValueStyle"
+                    android:editable="false"
+                    android:focusable="false"/>
+            </TableRow>
+            -->
+            </TableLayout>
+        <Button
+            android:id="@+id/button_ProfileSave"
+            android:layout_width="fill_parent"
+            android:text="Save"
+            android:layout_column="1"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_margin="10dp"
+            style="@style/ButtonStyle"/>
+        </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
+
+
