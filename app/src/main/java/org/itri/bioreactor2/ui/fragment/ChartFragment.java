@@ -81,7 +81,7 @@ public class ChartFragment extends Fragment implements RadioGroup.OnCheckedChang
         Log.d("Test","onCreateView");
         db = DBHandler.getInstance(this.getActivity());
         reactor = BioreactorController.getInstance(this.getActivity());
-		rootView = inflater.inflate(R.layout.activity_linechart, container, false);
+		rootView = inflater.inflate(R.layout.fragment_linechart, container, false);
         //tvX = (TextView) rootView.findViewById(R.id.tvXMax);
         //tvY = (TextView) rootView.findViewById(R.id.tvYMax);
         //mSeekBarX = (SeekBar) rootView.findViewById(R.id.seekBar1);

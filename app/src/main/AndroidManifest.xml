@@ -50,10 +50,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/select_device"
             android:theme="@android:style/Theme.Dialog" />
-        <activity
-            android:name=".ui.AutoControlActivity"
-            android:label="@string/title_activity_auto_control"
-            android:screenOrientation="landscape" />
+
 
         <!-- Points to searchable activity so the whole app can invoke search. -->
         <meta-data

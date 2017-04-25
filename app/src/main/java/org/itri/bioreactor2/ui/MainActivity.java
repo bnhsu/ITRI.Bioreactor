@@ -2,34 +2,32 @@ package org.itri.bioreactor2.ui;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import org.itri.bioreactor2.R;
-import org.itri.bioreactor2.ui.fragment.AllSettingFragment;
+import org.itri.bioreactor2.autocontrol.AutomationController;
+import org.itri.bioreactor2.controller.BioreactorController;
+import org.itri.bioreactor2.data.database.DBHandler;
+import org.itri.bioreactor2.data.tools.DataRecorder;
+import org.itri.bioreactor2.ui.fragment.AutoControlFragment;
 import org.itri.bioreactor2.ui.fragment.AutoUIFragment;
 import org.itri.bioreactor2.ui.fragment.ChartFragment;
-import org.itri.bioreactor2.ui.fragment.TabFragment;
-import org.itri.bioreactor2.ui.tools.tappager.SlidingTabLayout;
-import org.itri.bioreactor2.ui.tools.tappager.TabsPagerAdapter;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,18 +39,24 @@ public class MainActivity extends AppCompatActivity {
 
     private android.support.design.widget.TabLayout mTabs;
 
+    private DataRecorder dataRecorder;
+
+    static DBHandler db;
+    static BioreactorController reactor;
+    static AutomationController automationController;
+
+    // String buffer for outgoing messages
+    private SharedPreferences settings;
+    public Context context;
+    boolean isDebuging = false;
+
     private ViewPager mViewPager;
+    private BottomNavigationView mNavigationView;
+    private MenuItem prevMenuItem;
 //    private SlidingTabLayout mSlidingTabLayout;
 //    private TabsPagerAdapter mAdapter;
 
-//    private SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private int[] headResource = { R.drawable.sidemeun_cover01,
-            R.drawable.sidemeun_cover02, R.drawable.sidemeun_cover03,
-            R.drawable.sidemeun_cover04, R.drawable.sidemeun_cover05,
-            R.drawable.sidemeun_cover06, R.drawable.sidemeun_cover07,
-            R.drawable.sidemeun_cover08, R.drawable.sidemeun_cover09,
-            R.drawable.sidemeun_cover10, };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +64,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initToolbar();
         initViewPager();
-        //initSwipRefresh();
-    }
-/*
-    private void initSwipRefresh(){
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
+        db = DBHandler.getInstance(this);
+        reactor = BioreactorController.getInstance(this);
+
+
+        // Initilization
+        settings = this.getSharedPreferences("setting", 0);
+        context = this;
+
+        //init data recorder
+        dataRecorder = new DataRecorder();
+        dataRecorder.dataHeader = "[header] \r\n";
 
     }
-*/
+
     private void initToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Set an OnMenuItemClickListener to handle menu item clicks
@@ -111,33 +115,70 @@ public class MainActivity extends AppCompatActivity {
     private void initViewPager(){
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
-        mTabs = (TabLayout) findViewById(R.id.tabs);
-        mTabs.setupWithViewPager(mViewPager);
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabs));
-/*
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        //mAdapter = new TabsPagerAdapter(getSupportFragmentManager(),fragments,titles);
-        //mViewPager.setAdapter(mAdapter);
-        mViewPager.setAdapter(new ViewPagerAdapter());
-        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setViewPager(mViewPager);
-*/
+
+        mNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_monitor:
+                                mViewPager.setCurrentItem(0);
+                                break;
+                            case R.id.action_autocontrol:
+                                mViewPager.setCurrentItem(1);
+                                break;
+                            case R.id.action_chart:
+                                mViewPager.setCurrentItem(2);
+                                break;
+                        }
+                        return false;
+                    }
+                });
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (prevMenuItem != null) {
+                    prevMenuItem.setChecked(false);
+                } else {
+                    mNavigationView.getMenu().getItem(0).setChecked(false);
+                }
+                mNavigationView.getMenu().getItem(position).setChecked(true);
+                prevMenuItem = mNavigationView.getMenu().getItem(position);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+
+        });
+
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private final String[] tabTitles = {
                 getString(R.string.main_tab_monitor),
-                getString(R.string.main_tab_history),
-                getString(R.string.main_tab_preference)
+                getString(R.string.main_tan_autocontrol),
+                getString(R.string.main_tab_history)
+                //getString(R.string.main_tab_preference)
                 //"流程測試"
         };
         private Fragment[] fragments = {
                 //new MonitorFragment(),
                 new AutoUIFragment(),
+                new AutoControlFragment(),
                 new ChartFragment(),
-                new AllSettingFragment()
+                //new AllSettingFragment()
         };
 
         public ViewPagerAdapter(FragmentManager fm){
@@ -216,5 +257,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void startAutoControl(View view){
+        automationController = AutomationController.getInstance(this);
+        Log.d("activty","start to AutoControl");
     }
 }

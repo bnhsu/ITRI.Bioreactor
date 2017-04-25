@@ -21,50 +21,7 @@
                 android:id="@+id/drawer_downloaded"
                 android:icon="@drawable/ic_close_search"
                 android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded1"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded2"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded3"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded4"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded5"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded6"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded7"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded8"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded9"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded10"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
-            <item
-                android:id="@+id/drawer_downloaded11"
-                android:icon="@drawable/ic_close_search"
-                android:title="@string/downloaded"/>
+
 
         </menu>
     </item>

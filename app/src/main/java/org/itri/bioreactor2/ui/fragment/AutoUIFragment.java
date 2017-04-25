@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import org.itri.bioreactor2.R;
-import org.itri.bioreactor2.ui.AutoControlActivity;
 import org.itri.bioreactor2.ui.component.uiHeatBlanket;
 import org.itri.bioreactor2.ui.component.uiNFC;
 import org.itri.bioreactor2.ui.component.uiPump;
@@ -28,7 +27,7 @@ public class AutoUIFragment extends Fragment {
                              Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_autoui, container, false);
 		RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.autoui);
-		Button send = (Button) rootView.findViewById(R.id.send);
+
 
 		uiNFC CaliCheck = new uiNFC(getActivity().getApplicationContext(), "NFC");
 
@@ -76,16 +75,18 @@ public class AutoUIFragment extends Fragment {
 		stepmotor.setX(1450);
 		stepmotor.setY(810);
 		layout.addView(stepmotor);
-
+/*
+		For activity
 		send.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Log.d("activity", "Switch to autocontrol");
-				Intent intent = new Intent(getActivity(), AutoControlActivity.class);
+				Intent intent = new Intent(getActivity(), AutoControlFragment.class);
 				startActivity(intent);
 			}
 		});
+*/
 		return rootView;
 
 

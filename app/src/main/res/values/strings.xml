@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">bioreactor2</string>
+    <string name="app_name">Bioreactor 2</string>
 
     <string name="main_tab_monitor">MONITOR</string>
     <string name="main_tab_history">HISTORY DATA</string>
     <string name="main_tab_preference">SETTING</string>
+    <string name="main_tan_autocontrol">AUTO CONTROL</string>
 
 
 
