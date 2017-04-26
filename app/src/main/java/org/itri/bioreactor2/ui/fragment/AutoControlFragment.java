@@ -1,21 +1,24 @@
 package org.itri.bioreactor2.ui.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.itri.bioreactor2.R;
+import org.itri.bioreactor2.ui.adpater.AutoControlCardAdapter;
 
 
 public class AutoControlFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+
+    private int count = 0;
 
     public AutoControlFragment() {
         // Required empty public constructor
@@ -24,17 +27,27 @@ public class AutoControlFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_autocontrol, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_autocontrol, container, false);
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
 
+
+
+        String[] CardTitle = new String [] {"Cell 1", "Cell 2", "Cell 3", "Cell 4", "Cell 5", "Cell 6"};
+
+        FloatingActionButton addCard = (FloatingActionButton)rootView.findViewById(R.id.fab);
+        addCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(rootView, "Add a Card", Snackbar.LENGTH_LONG).show();
+
+            }
+        });
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         rv.setHasFixedSize(true);
-        MyAdapter adapter = new MyAdapter(new String[]{"Example One", "Example Two", "Example Three",
-                "Example Four", "Example Five" , "Example Six" , "Example Seven","Example 8","Example 9",
-                "Example 10","Example 11","Example 12"});
-        rv.setAdapter(adapter);
 
+        AutoControlCardAdapter adapter = new AutoControlCardAdapter(CardTitle, getActivity());
+        rv.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
 
