@@ -106,4 +106,5 @@
 
     <string name="action_example">Example action</string>
     <string name="title_activity_step_view">StepViewActivity</string>
+    <string name="details">more</string>
 </resources>
