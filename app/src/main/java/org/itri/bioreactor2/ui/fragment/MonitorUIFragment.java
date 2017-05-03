@@ -20,7 +20,7 @@ import org.itri.bioreactor2.ui.component.uiStepMotor;
 import org.itri.bioreactor2.ui.component.uiStir;
 
 
-public class AutoUIFragment extends Fragment {
+public class MonitorUIFragment extends Fragment {
 
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,7 +82,7 @@ public class AutoUIFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Log.d("activity", "Switch to autocontrol");
-				Intent intent = new Intent(getActivity(), AutoControlFragment.class);
+				Intent intent = new Intent(getActivity(), AutoControlListFragment.class);
 				startActivity(intent);
 			}
 		});

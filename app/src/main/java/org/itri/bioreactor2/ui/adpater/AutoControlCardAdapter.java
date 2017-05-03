@@ -2,6 +2,8 @@ package org.itri.bioreactor2.ui.adpater;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.itri.bioreactor2.R;
-import org.itri.bioreactor2.ui.StepViewActivity;
+import org.itri.bioreactor2.ui.fragment.StepViewFragment;
 
 /**
  * Created by A20356 on 2017/4/25.
@@ -44,9 +46,13 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
         public void onClick(View v) {
             int position = getAdapterPosition();
             String mDatasetTitle = this.mDataset[position];
-            Intent intent = new Intent(this.context, StepViewActivity.class);
-            intent.putExtra("StepList_Title", mDatasetTitle);
-            this.context.startActivity(intent);
+            Fragment StepViewFragment = new StepViewFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("StepList_Title", mDatasetTitle);
+            StepViewFragment.setArguments(bundle);
+            //Intent intent = new Intent(this.context, StepViewFragment.class);
+            //intent.putExtra("StepList_Title", mDatasetTitle);
+            //this.context.startActivity(intent);
         }
     }
 

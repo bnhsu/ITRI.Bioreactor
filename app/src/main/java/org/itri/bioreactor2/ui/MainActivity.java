@@ -26,7 +26,7 @@ import org.itri.bioreactor2.controller.BioreactorController;
 import org.itri.bioreactor2.data.database.DBHandler;
 import org.itri.bioreactor2.data.tools.DataRecorder;
 import org.itri.bioreactor2.ui.fragment.AutoControlFragment;
-import org.itri.bioreactor2.ui.fragment.AutoUIFragment;
+import org.itri.bioreactor2.ui.fragment.MonitorUIFragment;
 import org.itri.bioreactor2.ui.fragment.ChartFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -174,8 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 //"流程測試"
         };
         private Fragment[] fragments = {
-                //new MonitorFragment(),
-                new AutoUIFragment(),
+                //new AutoControlFragment(),
+                new MonitorUIFragment(),
                 new AutoControlFragment(),
                 new ChartFragment(),
                 //new AllSettingFragment()

@@ -301,7 +301,7 @@ public class ChartFragment extends Fragment implements RadioGroup.OnCheckedChang
             mChart.notifyDataSetChanged();
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(yVals1, "溶氧值");
+            set1 = new LineDataSet(yVals1, "DO");
 
             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
             set1.setColor(ColorTemplate.getHoloBlue());
@@ -318,7 +318,7 @@ public class ChartFragment extends Fragment implements RadioGroup.OnCheckedChang
             //set1.setCircleHoleColor(Color.WHITE);
 
             // create a dataset and give it a type
-            set2 = new LineDataSet(yVals2, "酸鹼值");
+            set2 = new LineDataSet(yVals2, "pH");
             set2.setAxisDependency(YAxis.AxisDependency.RIGHT);
             set2.setColor(Color.RED);
             set2.setCircleColor(Color.RED);
@@ -330,7 +330,7 @@ public class ChartFragment extends Fragment implements RadioGroup.OnCheckedChang
             set2.setHighLightColor(Color.rgb(244, 117, 117));
             //set2.setFillFormatter(new MyFillFormatter(900f));
 
-            set3 = new LineDataSet(yVals3, "溫度");
+            set3 = new LineDataSet(yVals3, "TMP");
             set3.setAxisDependency(YAxis.AxisDependency.RIGHT);
             set3.setColor(Color.YELLOW);
             set3.setCircleColor(Color.YELLOW);
@@ -341,7 +341,7 @@ public class ChartFragment extends Fragment implements RadioGroup.OnCheckedChang
             set3.setDrawCircleHole(false);
             set3.setHighLightColor(Color.rgb(244, 117, 117));
 
-            set4 = new LineDataSet(yVals4, "攪拌器");
+            set4 = new LineDataSet(yVals4, "STIR");
             set4.setAxisDependency(YAxis.AxisDependency.LEFT);
             set4.setColor(Color.GREEN);
             set4.setCircleColor(Color.GREEN);

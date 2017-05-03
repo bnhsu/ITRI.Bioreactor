@@ -1,8 +1,6 @@
 package org.itri.bioreactor2.ui.adpater;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.itri.bioreactor2.R;
-import org.itri.bioreactor2.ui.StepViewActivity;
 import org.itri.bioreactor2.ui.tools.ExpandAndCollapseViewUtil;
 
 /**

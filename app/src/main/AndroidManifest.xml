@@ -53,7 +53,7 @@
             android:value=".SearchableActivity" />
 
         <activity
-            android:name=".ui.StepViewActivity"
+            android:name=".ui.fragment.StepViewFragment"
             android:label="@string/title_activity_step_view"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
