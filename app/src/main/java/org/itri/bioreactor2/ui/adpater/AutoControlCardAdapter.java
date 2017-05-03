@@ -14,15 +14,18 @@ import android.widget.TextView;
 import org.itri.bioreactor2.R;
 import org.itri.bioreactor2.ui.fragment.StepViewFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by A20356 on 2017/4/25.
  */
 
 public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCardAdapter.MyViewHolder> {
 
-    private String[] mDataset;
+    private ArrayList<String> mDataset;
     Context context;
-    public AutoControlCardAdapter(String[] myDataset, Context context){
+    public AutoControlCardAdapter(ArrayList<String> myDataset, Context context){
         mDataset = myDataset;
         this.context = context;
     }
@@ -30,9 +33,9 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView mCardView;
         public TextView mTextView;
-        String[] mDataset = new String[]{};
+        ArrayList<String> mDataset = new ArrayList<String>();
         Context context;
-        public MyViewHolder(View v, Context context, String[] mDataset){
+        public MyViewHolder(View v, Context context, ArrayList<String> mDataset){
             super(v);
             this.mDataset = mDataset;
             this.context = context;
@@ -45,7 +48,7 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            String mDatasetTitle = this.mDataset[position];
+            String mDatasetTitle = this.mDataset.get(position);
             Fragment StepViewFragment = new StepViewFragment();
             Bundle bundle = new Bundle();
             bundle.putString("StepList_Title", mDatasetTitle);
@@ -66,7 +69,7 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
-        holder.mTextView.setText(mDataset[position]);
+        holder.mTextView.setText(mDataset.get(position));
 
 
 
@@ -74,7 +77,7 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
     }
 
     @Override
-    public int getItemCount() { return mDataset.length; }
+    public int getItemCount() { return mDataset.size(); }
 
 
 
