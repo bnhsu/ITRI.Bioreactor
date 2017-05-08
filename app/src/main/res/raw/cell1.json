@@ -4,7 +4,9 @@
      "description":" Start",
      "setTo":
      {
-
+       "Pump1":"150",
+       "Pump2":"-40",
+       "Pump3":"20",
        "pH": "7"
      },
      "endIf":
@@ -17,7 +19,9 @@
     "description":" end",
     "setTo":
     {
-      "pH": "0"
+      "Stir":"1500",
+      "pH": "0",
+      "DO":"50"
     },
     "endIf":
     {
@@ -41,6 +45,7 @@
     "description":" HI 你好，我很好。",
     "setTo":
     {
+      "Pump1":"0",
       "pH": "0"
     },
     "endIf":

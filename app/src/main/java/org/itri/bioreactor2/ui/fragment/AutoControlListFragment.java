@@ -1,32 +1,29 @@
 package org.itri.bioreactor2.ui.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.EditText;
 import org.itri.bioreactor2.R;
 import org.itri.bioreactor2.ui.adpater.AutoControlCardAdapter;
-
 import java.io.File;
-import java.lang.reflect.Field;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class AutoControlListFragment extends Fragment {
 
-
     private int count = 0;
-
+    private String newFileName = null;
     final ArrayList<String> AutoControlTitle = new ArrayList<>();
-
 
     public AutoControlListFragment() {
         // Required empty public constructor
@@ -37,7 +34,6 @@ public class AutoControlListFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_autocontrollist, container, false);
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
-
 
         listRaw();
 
@@ -51,7 +47,6 @@ public class AutoControlListFragment extends Fragment {
         rv.setLayoutManager(llm);
 
         onFloatingButton(rootView, adapter);
-
         return rootView;
     }
 
@@ -60,27 +55,53 @@ public class AutoControlListFragment extends Fragment {
         addCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(view, "Add a Card", Snackbar.LENGTH_LONG).show();
-                int position = AutoControlTitle.size()+1;
-                AutoControlTitle.add("Cell " + position);
+                customDialog();
                 adapter.notifyItemInserted(AutoControlTitle.size());
             }
         });
     }
 
-
     // list all the conrtol file in the directory
     public void listRaw() {
         String path = getActivity().getExternalFilesDir(null).getAbsolutePath();
-        String fileName = null;
         File[] files = new File(path).listFiles();
         for (File file : files) {
             if (file.isFile()) {
-                String[] fileFullName = file.getName().split("\\.");
-                fileName = fileFullName[0];
                 AutoControlTitle.add(file.getName());
             }
         }
+    }
+
+    private void jsonCreate(String fileName) throws IOException {
+        File newJson = new File(getActivity().getExternalFilesDir(null).getAbsolutePath()
+                + File.separator + fileName +".json");
+        newJson.createNewFile();
+    }
+
+    private void customDialog(){
+        final View item = LayoutInflater.from(getActivity()).inflate(R.layout.addautocontrol_dialog, null);
+        new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_Alert)
+                .setTitle("Enter New AutoControl Name")
+                .setView(item)
+                .setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText editText = (EditText) item.findViewById(R.id.edit_text);
+                        newFileName = editText.getText().toString();
+                        AutoControlTitle.add(newFileName);
+                        try {
+                            jsonCreate(newFileName);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Do nothing
+                    }
+                }).show();
     }
 
 }

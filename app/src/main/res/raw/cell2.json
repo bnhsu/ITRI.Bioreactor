@@ -1,26 +1,86 @@
 [
    {
      "title": "起始",
-     "description": "step 1"
+     "description": "step 1",
+     "setTo":
+     {
+
+       "pH": "7"
+     },
+     "endIf":
+     {
+       "TIME": "40000"
+     }
    },
    {
         "title": "清洗",
-        "description": "step 2"
+        "description": "step 2",
+     "setTo":
+     {
+
+       "pH": "7"
+     },
+     "endIf":
+     {
+       "TIME": "40000"
+     }
    },
    {
         "title": "培養1",
-        "description": "step 3"
+        "description": "step 3",
+     "setTo":
+     {
+       "Stir":"1500",
+       "pH": "0",
+       "DO":"50"
+     },
+     "endIf":
+     {
+       "TIME": "40000"
+     }
    },
    {
         "title": "培養2",
-        "description": "step 4"
+        "description": "step 4",
+     "setTo":
+     {
+
+       "pH": "7"
+     },
+     "endIf":
+     {
+       "TIME": "40000"
+     }
    },
    {
         "title": "收成",
-        "description": "step 5"
+        "description": "step 5",
+     "setTo":
+     {
+       "Stir":"1500",
+       "pH": "0",
+       "DO":"50"
+     },
+     "endIf":
+     {
+       "TIME": "40000"
+     }
    },
    {
        "title": "清洗",
-       "description": "step 6"
+       "description": "step 6",
+     "setTo":
+     {
+       "Pump1":"150",
+       "Pump2":"-40",
+       "Pump3":"20",
+       "Stir":"1500",
+       "pH": "0",
+       "DO":"50"
+     },
+     "endIf":
+     {
+       "TIME": "40000"
+     }
    }
  ]

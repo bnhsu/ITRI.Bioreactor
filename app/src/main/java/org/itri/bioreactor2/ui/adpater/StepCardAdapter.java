@@ -13,9 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.itri.bioreactor2.R;
+import org.itri.bioreactor2.model.step;
 import org.itri.bioreactor2.ui.tools.ExpandAndCollapseViewUtil;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 /**
  * Created by A20356 on 2017/4/25.
@@ -23,36 +25,37 @@ import java.util.ArrayList;
 
 public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.MyViewHolder> {
 
-    private ArrayList<String> mTitle;
-    private ArrayList<String> mDescription;
+    private ArrayList<step> mStep;
+
     Context context;
 
+    public StepCardAdapter(ArrayList<step> mStep, Context context){
 
-    public StepCardAdapter(ArrayList<String> mDataset, ArrayList<String> Description, Context context){
-        mTitle = mDataset;
-        mDescription = Description;
+        this.mStep = mStep;
         this.context = context;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder  {
         public CardView mCardView;
-        public TextView mTextTitle, mTextDescription;
+        public TextView mTextTitle, mTextDescription, mTextSetTo, mTextEndIf;
         public LinearLayout linearLayoutDetails;
         public ImageView imageView;
         private static final int DURATION = 250;
 
-        ArrayList<String> mDataset = new ArrayList<String>();
-        ArrayList<String> mDescription = new ArrayList<String>();
+        ArrayList<step> mStep = new ArrayList<step>();
+
 
         Context context;
-        public MyViewHolder(View v, Context context, ArrayList<String> mDataset, ArrayList<String> mDescription){
+        public MyViewHolder(View v, Context context, ArrayList<step> mStep){
             super(v);
-            this.mDataset = mDataset;
-            this.mDescription = mDescription;
+            this.mStep = mStep;
+
             this.context = context;
             mCardView = (CardView) v.findViewById(R.id.card_view);
             mTextTitle = (TextView) v.findViewById(R.id.tv_text);
             mTextDescription =  (TextView) v.findViewById(R.id.tv_detail);
+            mTextSetTo = (TextView) v.findViewById(R.id.tv_setto);
+            mTextEndIf =  (TextView) v.findViewById(R.id.tv_endif);
             linearLayoutDetails = (LinearLayout) v.findViewById(R.id.linearLayoutDetails);
             imageView = (ImageView) v.findViewById(R.id.card_header_inner_expand_btn);
 
@@ -89,28 +92,36 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.MyView
             animation.setDuration(DURATION);
             imageView.startAnimation(animation);
         }
-
-
     }
 
 
     @Override
     public StepCardAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_step, parent, false);
-        MyViewHolder vh = new MyViewHolder(v, context, mTitle, mDescription);
+        MyViewHolder vh = new MyViewHolder(v, context, mStep);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
-        holder.mTextTitle.setText(mTitle.get(position));
-        holder.mTextDescription.setText(mDescription.get(position));
+
+        String Title, Description, Setto, Endif;
+        step Step = mStep.get(position);
+        Title = Step.getStepTitle();
+        Description = Step.getStepDescription();
+        Setto = Step.listAllSetTo();
+        Endif = Step.listAllEndIF();
+
+        holder.mTextTitle.setText(Title);
+        holder.mTextDescription.setText(Description);
+        holder.mTextSetTo.setText(Setto);
+        holder.mTextEndIf.setText(Endif);
 
 
     }
 
     @Override
-    public int getItemCount() { return mTitle.size(); }
+    public int getItemCount() { return mStep.size(); }
 
 
 

@@ -14,16 +14,25 @@ import android.widget.TextView;
 
 import org.itri.bioreactor2.R;
 import org.itri.bioreactor2.model.Script;
+import org.itri.bioreactor2.model.step;
 import org.itri.bioreactor2.ui.adpater.StepCardAdapter;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class StepViewFragment extends Fragment {
     TextView textView;
     String title= null;
+    final ArrayList<step> Step = new ArrayList<>();
+
+    /*
     final ArrayList<String> StepTitle = new ArrayList<>();
     final ArrayList<String> StepDiscreption = new ArrayList<>();
+    final ArrayList<Dictionary> StepSetTo = new ArrayList<>();
+    final ArrayList<Dictionary> StepEndIf = new ArrayList<>();
+    */
+
     private StepCardAdapter adapter;
 
     public StepViewFragment(){
@@ -65,15 +74,22 @@ public class StepViewFragment extends Fragment {
     }
 
     private void setupStepsDetail() throws FileNotFoundException {
-
+            /*
             StepTitle.clear();
             StepDiscreption.clear();
+            */
+            Step.clear();
             Script script = new Script(getActivity(), title);
             for (int i = 0; i < script.getScriptionSize(); i++) {
+                Step.add(script.getCurrentStep(i));
+                /*
                 StepTitle.add(script.getCurrentStep(i).getStepTitle());
                 StepDiscreption.add(script.getCurrentStep(i).getStepDescription());
+                StepSetTo.add(script.getCurrentStep(i).getStepSetTo());
+                StepEndIf.add(script.getCurrentStep(i).getStepEndIf());
+                */
             }
-            adapter.notifyItemInserted(StepTitle.size());
+            adapter.notifyItemInserted(Step.size());
 
     }
 
@@ -84,9 +100,9 @@ public class StepViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Snackbar.make(view, "Add a Step", Snackbar.LENGTH_LONG).show();
-                int position = StepTitle.size()+1;
-                StepTitle.add("STEP " + position);
-                adapter.notifyItemInserted(StepTitle.size());
+                int position = Step.size()+1;
+                //Step.add("STEP " + position);
+                adapter.notifyItemInserted(Step.size());
 
             }
         });
@@ -99,7 +115,8 @@ public class StepViewFragment extends Fragment {
         // in content do not change the layout size of the RecyclerView
         rv.setHasFixedSize(true);
 
-        StepCardAdapter adapter = new StepCardAdapter(StepTitle, StepDiscreption,getActivity());
+        //StepCardAdapter adapter = new StepCardAdapter(StepTitle, StepDiscreption, StepSetTo, StepEndIf, getActivity());
+        StepCardAdapter adapter = new StepCardAdapter(Step, getActivity());
         rv.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);

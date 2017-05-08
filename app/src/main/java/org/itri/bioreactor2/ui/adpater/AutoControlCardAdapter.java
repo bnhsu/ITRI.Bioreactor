@@ -78,8 +78,6 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
             //intent.putExtra("StepList_Title", mDatasetTitle);
             //this.context.startActivity(intent);
         }
-
-
     }
 
 
@@ -92,7 +90,10 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
-        holder.mTextView.setText(mDataset.get(position));
+        String fileName = null;
+            String[] fileFullName = mDataset.get(position).split("\\.");
+            fileName = fileFullName[0];
+        holder.mTextView.setText(fileName);
 
 
 
