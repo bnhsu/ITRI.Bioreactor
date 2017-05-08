@@ -15,38 +15,47 @@ import android.widget.TextView;
 import org.itri.bioreactor2.R;
 import org.itri.bioreactor2.ui.tools.ExpandAndCollapseViewUtil;
 
+import java.util.ArrayList;
+
 /**
  * Created by A20356 on 2017/4/25.
  */
 
 public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.MyViewHolder> {
 
-    private String[] mDataset;
+    private ArrayList<String> mTitle;
+    private ArrayList<String> mDescription;
     Context context;
 
 
-    public StepCardAdapter(String[] myDataset, Context context){
-        mDataset = myDataset;
+    public StepCardAdapter(ArrayList<String> mDataset, ArrayList<String> Description, Context context){
+        mTitle = mDataset;
+        mDescription = Description;
         this.context = context;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder  {
         public CardView mCardView;
-        public TextView mTextView;
+        public TextView mTextTitle, mTextDescription;
         public LinearLayout linearLayoutDetails;
         public ImageView imageView;
         private static final int DURATION = 250;
 
-        String[] mDataset = new String[]{};
+        ArrayList<String> mDataset = new ArrayList<String>();
+        ArrayList<String> mDescription = new ArrayList<String>();
+
         Context context;
-        public MyViewHolder(View v, Context context, String[] mDataset){
+        public MyViewHolder(View v, Context context, ArrayList<String> mDataset, ArrayList<String> mDescription){
             super(v);
             this.mDataset = mDataset;
+            this.mDescription = mDescription;
             this.context = context;
             mCardView = (CardView) v.findViewById(R.id.card_view);
-            mTextView = (TextView) v.findViewById(R.id.tv_text);
+            mTextTitle = (TextView) v.findViewById(R.id.tv_text);
+            mTextDescription =  (TextView) v.findViewById(R.id.tv_detail);
             linearLayoutDetails = (LinearLayout) v.findViewById(R.id.linearLayoutDetails);
             imageView = (ImageView) v.findViewById(R.id.card_header_inner_expand_btn);
+
             imageView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v) {
                     toggleDetails(v);
@@ -55,7 +64,12 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.MyView
 
 
         }
-
+/*
+        @Override
+        public void onClick(View v) {
+            toggleDetails(v);
+        }
+*/
         public void toggleDetails(View view) {
             if (linearLayoutDetails.getVisibility() == View.GONE) {
                 ExpandAndCollapseViewUtil.expand(linearLayoutDetails, DURATION);
@@ -76,27 +90,27 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.MyView
             imageView.startAnimation(animation);
         }
 
+
     }
 
 
     @Override
     public StepCardAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_step, parent, false);
-        MyViewHolder vh = new MyViewHolder(v, context, mDataset);
+        MyViewHolder vh = new MyViewHolder(v, context, mTitle, mDescription);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
-        holder.mTextView.setText(mDataset[position]);
-
-
+        holder.mTextTitle.setText(mTitle.get(position));
+        holder.mTextDescription.setText(mDescription.get(position));
 
 
     }
 
     @Override
-    public int getItemCount() { return mDataset.length; }
+    public int getItemCount() { return mTitle.size(); }
 
 
 

@@ -20,7 +20,9 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="32dp"
-                android:src="@drawable/ic_adjust_black_24dp"></ImageView>
+                android:src="@drawable/ic_adjust_black_24dp">
+
+            </ImageView>
 
             <TextView
                 android:id="@+id/tv_text"
@@ -29,32 +31,91 @@
                 android:layout_toRightOf="@+id/iv_image"
                 android:layout_marginTop="32dp"
                 android:gravity="center"
-                android:textSize="30sp"></TextView>
+                android:textSize="24sp">
+
+            </TextView>
             <ImageView
                 android:id="@+id/card_header_inner_expand_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:layout_alignBottom="@+id/iv_image"
+                android:layout_alignBottom="@+id/tv_detail"
                 android:layout_marginRight="50dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_expand_more_black_24dp" />
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_image"
+                android:layout_below="@id/tv_text"
+                android:text="Description"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_alignStart="@+id/tv_text">
+
+            </TextView>
 
             <LinearLayout
                 android:id="@+id/linearLayoutDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_alignStart="@+id/tv_text"
-                android:layout_below="@+id/tv_text"
+                android:layout_alignStart="@+id/tv_detail"
+                android:layout_below="@+id/tv_detail"
                 android:visibility="gone">
+
+
                 <TextView
-                    android:id="@+id/tv_detail"
+                    android:id="@+id/tv_settoTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Another Recyclerview Fragment \n test123 \n test12312312312313213"
+                    android:text="Goal value:"
+                    android:textSize="18sp"
                     android:layout_marginTop="16dp"
-                    android:layout_alignStart="@+id/tv_text"></TextView>
+                    android:layout_alignStart="@+id/tv_text">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/tv_setto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="set to detail"
+                    android:textSize="18sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_alignStart="@+id/tv_text">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/tv_endifTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Run Time:"
+                    android:textSize="18sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_alignStart="@+id/tv_text">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/tv_endif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="endif detail"
+                    android:textSize="18sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_alignStart="@+id/tv_text">
+
+                </TextView>
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/cardview_light_background"
+                    android:text="Edit" />
             </LinearLayout>
 
 

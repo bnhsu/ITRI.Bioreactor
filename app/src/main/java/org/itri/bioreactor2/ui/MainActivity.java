@@ -29,6 +29,8 @@ import org.itri.bioreactor2.ui.fragment.AutoControlFragment;
 import org.itri.bioreactor2.ui.fragment.MonitorUIFragment;
 import org.itri.bioreactor2.ui.fragment.ChartFragment;
 
+import java.io.FileNotFoundException;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
@@ -66,8 +68,13 @@ public class MainActivity extends AppCompatActivity {
         initViewPager();
         db = DBHandler.getInstance(this);
         reactor = BioreactorController.getInstance(this);
-
-
+/*        try {
+            automationController = AutomationController.getInstance(this, "cell1");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.i("Error", "automation no action");
+         }
+ */
         // Initilization
         settings = this.getSharedPreferences("setting", 0);
         context = this;
@@ -260,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startAutoControl(View view){
-        automationController = AutomationController.getInstance(this);
+        //automationController = AutomationController.getInstance(this);
         Log.d("activty","start to AutoControl");
     }
 }

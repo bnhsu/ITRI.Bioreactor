@@ -7,6 +7,7 @@ import android.util.Log;
 import org.itri.bioreactor2.model.Script;
 import org.itri.bioreactor2.model.step;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -16,6 +17,7 @@ import java.util.Enumeration;
 
 public class AutomationController  {
     public Context context;
+    private String fileTitle;
     private static AutomationController sInstance;
     private ArrayList<step> StepList;
     private Object key;
@@ -26,38 +28,42 @@ public class AutomationController  {
     private oxygenAutomator oxygenAutomator;
     private int j = 0;
 
-    public static AutomationController getInstance(Context context) {
+    public static AutomationController getInstance(Context context, String fileTitle) throws FileNotFoundException {
         // Use the application context, which will ensure that you
         // don't accidentally leak an Activity's context.
         if (sInstance == null) {
-            sInstance = new AutomationController(context.getApplicationContext());
+            sInstance = new AutomationController(context.getApplicationContext(), fileTitle);
         }
         return sInstance;
     }
 
 
-    private AutomationController(Context context){
+    private AutomationController(Context context, String fileTitle) throws FileNotFoundException {
         this.context = context;
-        Script st = Script.getInstance(context);
+        this.fileTitle = fileTitle;
+        Script st = new Script(context, fileTitle);
+        Currentstep = st.getCurrentStep(j++);
         StepList = st.list();
-        autoControl(StepList);
+        //autoControl(StepList);
+        autoSetto();    //Setto
+        autoEndIf(StepList);    //Endif
     }
-
+/*
     private void autoControl(ArrayList<step> StepList){
         this.StepList = StepList;
         Currentstep = StepList.get(j++);
         autoSetto();    //Setto
         autoEndIf(StepList);    //Endif
     }
-
+*/
     private void autoSetto(){
 
-        for(Enumeration<Object> v = Currentstep.setTo.keys(); v.hasMoreElements();){
+        for(Enumeration<Object> v = Currentstep.getStepSetTo().keys(); v.hasMoreElements();){
             //key =  Currentstep.setTo.keys();
             //Log.d("TEST",Currentstep.setTo.get(key.toString()).toString());
             key = v.nextElement();
             if(key.toString().contains("Pump1")) {
-                goalValue = Currentstep.setTo.get(key.toString()).toString();
+                goalValue = Currentstep.getStepSetTo().get(key.toString()).toString();
                 if(pump == null) {
                     pump = new pumpAutomator(context, key.toString(), goalValue);
                 }
@@ -66,7 +72,7 @@ public class AutomationController  {
                 }
             }
             else if(key.toString().contains("pH")){
-                goalValue = Currentstep.setTo.get(key.toString()).toString();
+                goalValue = Currentstep.getStepSetTo().get(key.toString()).toString();
                 if(pHAutomator == null) {
                     pHAutomator = new pHAutomator(context, key.toString(), goalValue);
                 }else{
@@ -74,7 +80,7 @@ public class AutomationController  {
                 }
             }
             else if(key.toString().contains("DO")){
-                goalValue = Currentstep.setTo.get(key.toString()).toString();
+                goalValue = Currentstep.getStepSetTo().get(key.toString()).toString();
                 if(oxygenAutomator == null) {
                     oxygenAutomator = new oxygenAutomator(context, key.toString(), goalValue);
                 }else{
@@ -90,11 +96,11 @@ public class AutomationController  {
         this.StepList = StepList;
 //        final Iterator i = StepList.iterator();
 
-        for(Enumeration<Object> y = Currentstep.endIf.keys(); y.hasMoreElements();){
+        for(Enumeration<Object> y = Currentstep.getStepEndIf().keys(); y.hasMoreElements();){
             //key = Currentstep.endIf.keys().nextElement();
             key = y.nextElement();
             if(key.toString().contains("TIME")) {
-                goalValue = Currentstep.endIf.get(key.toString()).toString();
+                goalValue = Currentstep.getStepEndIf().get(key.toString()).toString();
                 CountDownValue = Long.parseLong(goalValue);
                 CountDownTimer EndCountDownTimer = new CountDownTimer( CountDownValue,1000 ) {
                     @Override

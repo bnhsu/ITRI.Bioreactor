@@ -13,15 +13,22 @@ import org.itri.bioreactor2.R;
 import org.itri.bioreactor2.model.Script;
 import org.itri.bioreactor2.model.step;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
 public class StepsFragment extends android.support.v4.app.ListFragment {
 
+	String filetitle;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-		Script st = Script.getInstance(getActivity().getApplicationContext());
+		Script st = null;
+		try {
+			st = new Script(getActivity().getApplicationContext(), filetitle);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		StepsAdapter stepsAdapter = new StepsAdapter(getActivity().getApplicationContext(), st.list());
 		setListAdapter(stepsAdapter);
 
@@ -46,9 +53,9 @@ public class StepsFragment extends android.support.v4.app.ListFragment {
 				convertView =  LayoutInflater.from(getContext()).inflate(R.layout.control_steps, parent, false);
 			}
 			TextView txt1 = (TextView)convertView.findViewById(R.id.text_step_title);
-			txt1.setText(steps.get(position).title);
+			txt1.setText(steps.get(position).getStepTitle());
 			TextView txt2 = (TextView)convertView.findViewById(R.id.text_step_description);
-			txt2.setText(steps.get(position).description);
+			txt2.setText(steps.get(position).getStepDescription());
 			return convertView;
 		}
 	}

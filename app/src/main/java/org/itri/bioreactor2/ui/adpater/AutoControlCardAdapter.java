@@ -1,11 +1,16 @@
 package org.itri.bioreactor2.ui.adpater;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +30,9 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
 
     private ArrayList<String> mDataset;
     Context context;
+    private static String previousTitle = null;
+    private static String mDatasetTitle;
+
     public AutoControlCardAdapter(ArrayList<String> myDataset, Context context){
         mDataset = myDataset;
         this.context = context;
@@ -33,8 +41,10 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView mCardView;
         public TextView mTextView;
-        ArrayList<String> mDataset = new ArrayList<String>();
+        ArrayList<String> mDataset = new ArrayList<>();
         Context context;
+
+
         public MyViewHolder(View v, Context context, ArrayList<String> mDataset){
             super(v);
             this.mDataset = mDataset;
@@ -48,15 +58,28 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            String mDatasetTitle = this.mDataset.get(position);
-            Fragment StepViewFragment = new StepViewFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("StepList_Title", mDatasetTitle);
-            StepViewFragment.setArguments(bundle);
+            mDatasetTitle = this.mDataset.get(position);
+            Log.d("test", "onClick :" +mDatasetTitle + ", previousTitle: "+ previousTitle);
+
+            if(!mDatasetTitle.equals(previousTitle)) {
+                previousTitle = mDatasetTitle;
+                //FragmentTransaction ft= getSupportFragmentManager().beginTransaction();;
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment StepViewFragment = new StepViewFragment();
+
+                activity.getSupportFragmentManager().beginTransaction().
+                        replace(R.id.fragment_stepview, StepViewFragment).addToBackStack(null).commit();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("file_Title", mDatasetTitle);
+                StepViewFragment.setArguments(bundle);
+            }
             //Intent intent = new Intent(this.context, StepViewFragment.class);
             //intent.putExtra("StepList_Title", mDatasetTitle);
             //this.context.startActivity(intent);
         }
+
+
     }
 
 

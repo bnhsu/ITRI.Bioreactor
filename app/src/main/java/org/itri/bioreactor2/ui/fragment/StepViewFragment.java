@@ -2,12 +2,10 @@ package org.itri.bioreactor2.ui.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,24 +13,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.itri.bioreactor2.R;
+import org.itri.bioreactor2.model.Script;
 import org.itri.bioreactor2.ui.adpater.StepCardAdapter;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class StepViewFragment extends Fragment {
     TextView textView;
-    String title;
-    String[] CardTitle = new String [] {"STEP 1", "STEP 2", "STEP 3", "STEP 4", "STEP 5", "STEP 6"};
+    String title= null;
+    final ArrayList<String> StepTitle = new ArrayList<>();
+    final ArrayList<String> StepDiscreption = new ArrayList<>();
+    private StepCardAdapter adapter;
 
     public StepViewFragment(){
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle saveInstanceState){
-        super.onCreate(saveInstanceState);
-        Bundle bundle = this.getArguments();
-        if (saveInstanceState != null){
-            title = bundle.getString("StepList_Title");
-        }
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -40,38 +41,70 @@ public class StepViewFragment extends Fragment {
                              Bundle savedInstanceState)  {
 
         View rootView = inflater.inflate(R.layout.fragment_stepview, container, false);
+        adapter = setupRecyclerView(rootView);
+
+        savedInstanceState = this.getArguments();
+        if (savedInstanceState != null){
+            title = savedInstanceState.getString("file_Title");
+        }
+
         Log.d("test","onCreat StepViewFragment: " + title);
 
+        try {
+            setupStepsDetail();
+        } catch (FileNotFoundException e) {
+            Log.d("FileNotFoundException","FileNotFoundException ");
+            e.printStackTrace();
+        }
         //setupToolBar(); activity only
-        setupFloatingActionButton(rootView);
-        setupRecyclerView(rootView);
+
+
+        setupFloatingActionButton(rootView, adapter);
         return rootView;
 
     }
 
-    private void setupFloatingActionButton(final View view){
+    private void setupStepsDetail() throws FileNotFoundException {
+
+            StepTitle.clear();
+            StepDiscreption.clear();
+            Script script = new Script(getActivity(), title);
+            for (int i = 0; i < script.getScriptionSize(); i++) {
+                StepTitle.add(script.getCurrentStep(i).getStepTitle());
+                StepDiscreption.add(script.getCurrentStep(i).getStepDescription());
+            }
+            adapter.notifyItemInserted(StepTitle.size());
+
+    }
+
+    private void setupFloatingActionButton(final View view, final StepCardAdapter adapter){
         //final View CoordinatorLayout = view.findViewById(R.id.CoordinatorLayout);
         FloatingActionButton addCard = (FloatingActionButton)view.findViewById(R.id.fab);
         addCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(view, "Add a Step", Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(view, "Add a Step", Snackbar.LENGTH_LONG).show();
+                int position = StepTitle.size()+1;
+                StepTitle.add("STEP " + position);
+                adapter.notifyItemInserted(StepTitle.size());
 
             }
         });
     }
 
-    private void setupRecyclerView(View view){
+    private StepCardAdapter setupRecyclerView(View view){
 
         RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         rv.setHasFixedSize(true);
 
-        StepCardAdapter adapter = new StepCardAdapter(CardTitle, getActivity());
+        StepCardAdapter adapter = new StepCardAdapter(StepTitle, StepDiscreption,getActivity());
         rv.setAdapter(adapter);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
+
+        return adapter;
 
         // specify an adapter (see also next example)
         //mAdapter = new MyAdapter1(myDataset);

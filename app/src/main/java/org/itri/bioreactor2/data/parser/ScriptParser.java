@@ -70,13 +70,13 @@ public class ScriptParser {
             while (reader.hasNext()) {
                 String name = reader.nextName();
                 if (name.equals("title")) {
-                    st.title = reader.nextString();
+                    st.setStepTitle(reader.nextString());
                 } else if (name.equals("description")) {
-                    st.description = reader.nextString();
+                    st.setStepDescription(reader.nextString());
                 } else if (name.equals("setTo")){
-                    st.setTo = readSetTo(reader);
+                    st.setStepSetTo( readSetTo(reader));
                 } else if (name.equals("endIf")) {
-                    st.endIf = readSetTo(reader);
+                    st.setStepEndIf(readSetTo(reader));
                 }else {
                     reader.skipValue();
                 }
