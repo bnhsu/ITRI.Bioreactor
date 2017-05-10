@@ -44,7 +44,6 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
         ArrayList<String> mDataset = new ArrayList<>();
         Context context;
 
-
         public MyViewHolder(View v, Context context, ArrayList<String> mDataset){
             super(v);
             this.mDataset = mDataset;
@@ -52,7 +51,6 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
             itemView.setOnClickListener(this);
             mCardView = (CardView) v.findViewById(R.id.card_view);
             mTextView = (TextView) v.findViewById(R.id.tv_text);
-
         }
 
         @Override

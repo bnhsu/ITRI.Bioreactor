@@ -55,25 +55,25 @@ public class step {
 
             key = v.nextElement();
             if(key.toString().contains("Pump1")) {
-                setToString = ("Pump1:" + getStepSetTo().get(key.toString()).toString() +"\n");
+                setToString = ("Pump1: " + getStepSetTo().get(key.toString()).toString() +" rpm\n");
             }
             else if(key.toString().contains("Pump2")){
-                setToString = setToString + ("Pump2:" + getStepSetTo().get(key.toString()).toString() +"\n");
+                setToString = setToString + ("Pump2: " + getStepSetTo().get(key.toString()).toString() +" rpm\n");
             }
             else if(key.toString().contains("Pump3")){
-                setToString = setToString +("Pump3:" + getStepSetTo().get(key.toString()).toString() +"\n");
+                setToString = setToString +("Pump3: " + getStepSetTo().get(key.toString()).toString() +" rpm\n");
             }
             else if(key.toString().contains("Stir")){
-                setToString = setToString +("Stir:" + getStepSetTo().get(key.toString()).toString() +"\n");
+                setToString = setToString +("Stir: " + getStepSetTo().get(key.toString()).toString() +" rpm\n");
             }
             else if(key.toString().contains("TMP")){
-                setToString = setToString +("TMP:" + getStepSetTo().get(key.toString()).toString() +"\n");
+                setToString = setToString +("TMP: " + getStepSetTo().get(key.toString()).toString() +" °C\n");
             }
             else if(key.toString().contains("pH")){
-                setToString = setToString +("pH:" + getStepSetTo().get(key.toString()).toString() +"\n");
+                setToString = setToString +("pH: " + getStepSetTo().get(key.toString()).toString() +"\n");
             }
             else if(key.toString().contains("DO")){
-                setToString = setToString +("DO:" + getStepSetTo().get(key.toString()).toString() +"\n");
+                setToString = setToString +("DO: " + getStepSetTo().get(key.toString()).toString() +" %\n");
             }
         }
 
@@ -86,7 +86,7 @@ public class step {
 
             key = v.nextElement();
             if(key.toString().contains("TIME")) {
-                endIfString = ("TIME:" + getStepEndIf().get(key.toString()).toString() +" seconds \n");
+                endIfString = (getStepEndIf().get(key.toString()).toString() +" seconds \n");
             }
             else if(key.toString().contains("Pump2")){
                 endIfString = endIfString + ("Pump2:" + getStepEndIf().get(key.toString()).toString() +"\n");
