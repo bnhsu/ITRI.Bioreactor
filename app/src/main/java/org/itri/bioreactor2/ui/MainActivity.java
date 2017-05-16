@@ -34,15 +34,10 @@ import java.io.FileNotFoundException;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-
     private Toolbar toolbar;
-
     private android.support.design.widget.TabLayout mTabs;
-
     private DataRecorder dataRecorder;
-
     static DBHandler db;
     static BioreactorController reactor;
     static AutomationController automationController;
@@ -57,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
     private MenuItem prevMenuItem;
 //    private SlidingTabLayout mSlidingTabLayout;
 //    private TabsPagerAdapter mAdapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-
         });
 
     }
@@ -191,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
         public ViewPagerAdapter(FragmentManager fm){
             super(fm);
         }
-
 
         @Override
         public int getCount() {
@@ -231,8 +222,6 @@ public class MainActivity extends AppCompatActivity {
         }
  */
     }
-
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

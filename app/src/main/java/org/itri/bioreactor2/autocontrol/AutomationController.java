@@ -4,8 +4,8 @@ import android.content.Context;
 import android.os.CountDownTimer;
 import android.util.Log;
 
-import org.itri.bioreactor2.model.Script;
-import org.itri.bioreactor2.model.step;
+import org.itri.bioreactor2.autocontrol.component.Script;
+import org.itri.bioreactor2.autocontrol.component.step;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -42,6 +42,7 @@ public class AutomationController  {
         this.context = context;
         this.fileTitle = fileTitle;
         Script st = new Script(context, fileTitle);
+        st.readScrip();
         Currentstep = st.getCurrentStep(j++);
         StepList = st.list();
         //autoControl(StepList);

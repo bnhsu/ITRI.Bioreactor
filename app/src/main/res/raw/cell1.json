@@ -1,7 +1,7 @@
 [
    {
      "title": "Step 1",
-     "description":" Start",
+     "description":"Start",
      "setTo":
      {
        "Pump1":"150",
@@ -16,7 +16,7 @@
    },
   {
     "title": "Step 2",
-    "description":" end",
+    "description":"end",
     "setTo":
     {
       "Stir":"1500",
@@ -30,7 +30,7 @@
   },
   {
     "title": "Step 3",
-    "description":" HI你好",
+    "description":"HI你好",
     "setTo":
     {
       "pH": "0"
@@ -42,7 +42,7 @@
   },
   {
     "title": "Step 4",
-    "description":" HI 你好，我很好。",
+    "description":"HI 你好，我很好。",
     "setTo":
     {
       "Pump1":"0",

@@ -1,4 +1,4 @@
-package org.itri.bioreactor2.data.parser;
+package org.itri.bioreactor2.autocontrol.parser;
 
 /**
  * Created by norman on 2017/2/14.
@@ -6,7 +6,7 @@ package org.itri.bioreactor2.data.parser;
 
 import android.util.JsonReader;
 
-import org.itri.bioreactor2.model.step;
+import org.itri.bioreactor2.autocontrol.component.step;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -98,4 +98,6 @@ public class ScriptParser {
         reader.endObject();
         return SetTo;
     }
+
+
 }

@@ -3,18 +3,19 @@ package org.itri.bioreactor2.ui.adpater;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.itri.bioreactor2.R;
-import org.itri.bioreactor2.model.step;
+import org.itri.bioreactor2.autocontrol.component.step;
+import org.itri.bioreactor2.ui.dialog.EditStepDialog;
 import org.itri.bioreactor2.ui.tools.ExpandAndCollapseViewUtil;
 
 import java.util.ArrayList;
@@ -38,11 +39,12 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.StepVi
         public TextView mTextTitle, mTextDescription, mTextSetTo, mTextEndIf;
         public LinearLayout linearLayoutDetails;
         public ImageView imageView;
+        public Button button;
         private static final int DURATION = 250;
         ArrayList<step> mStep = new ArrayList<step>();
         Context context;
 
-        public StepViewHolder(View v, Context context, ArrayList<step> mStep){
+        public StepViewHolder(View v, final Context context, final ArrayList<step> mStep){
             super(v);
             this.mStep = mStep;
             this.context = context;
@@ -54,6 +56,7 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.StepVi
             mTextEndIf =  (TextView) v.findViewById(R.id.tv_endif);
             linearLayoutDetails = (LinearLayout) v.findViewById(R.id.linearLayoutDetails);
             imageView = (ImageView) v.findViewById(R.id.card_header_inner_expand_btn);
+            button =(Button) v.findViewById(R.id.btn_edit);
 /*
             imageView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v) {
@@ -97,9 +100,10 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.StepVi
     }
 
     @Override
-    public void onBindViewHolder(StepViewHolder holder, int position){
+    public void onBindViewHolder(final StepViewHolder holder, int position){
         String Title, Description, Setto, Endif;
-        step Step = mStep.get(position);
+        final step Step = mStep.get(position);
+        final step[] newStep = {new step()};
         Title = Step.getStepTitle();
         Description = Step.getStepDescription();
         Setto = Step.listAllSetTo();
@@ -109,6 +113,20 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.StepVi
         holder.mTextDescription.setText(Description);
         holder.mTextSetTo.setText(Setto);
         holder.mTextEndIf.setText(Endif);
+
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EditStepDialog editStepDialog = new EditStepDialog(context, Step);
+                editStepDialog.show();
+                newStep[0] = editStepDialog.getEditStep();
+                holder.mTextTitle.setText(newStep[0].getStepTitle());
+                holder.mTextDescription.setText(newStep[0].getStepDescription());
+            }
+        });
+
+
     }
 
     @Override

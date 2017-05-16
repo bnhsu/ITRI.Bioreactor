@@ -1,4 +1,4 @@
-package org.itri.bioreactor2.model;
+package org.itri.bioreactor2.autocontrol.component;
 
 import java.util.Dictionary;
 import java.util.Enumeration;

@@ -33,6 +33,7 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
     private static String previousTitle = null;
     private static String mDatasetTitle;
 
+
     public AutoControlCardAdapter(ArrayList<String> myDataset, Context context){
         mDataset = myDataset;
         this.context = context;
@@ -68,8 +69,10 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
                 activity.getSupportFragmentManager().beginTransaction().
                         replace(R.id.fragment_stepview, StepViewFragment).addToBackStack(null).commit();
 
+                String[] fileFullName = mDatasetTitle.split("\\.");
+                String fileName = fileFullName[0];
                 Bundle bundle = new Bundle();
-                bundle.putString("file_Title", mDatasetTitle);
+                bundle.putString("file_Title", fileName);
                 StepViewFragment.setArguments(bundle);
             }
             //Intent intent = new Intent(this.context, StepViewFragment.class);
@@ -89,8 +92,8 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
         String fileName = null;
-            String[] fileFullName = mDataset.get(position).split("\\.");
-            fileName = fileFullName[0];
+        String[] fileFullName = mDataset.get(position).split("\\.");
+        fileName = fileFullName[0];
         holder.mTextView.setText(fileName);
 
 
@@ -100,7 +103,5 @@ public class AutoControlCardAdapter extends RecyclerView.Adapter<AutoControlCard
 
     @Override
     public int getItemCount() { return mDataset.size(); }
-
-
 
 }

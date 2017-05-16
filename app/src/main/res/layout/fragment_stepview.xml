@@ -8,16 +8,28 @@
     android:id="@+id/FrameLayout"
     tools:context="org.itri.bioreactor2.ui.fragment.StepViewFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:background="#ffffff"
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/stepViewToolbar">
 
+        </android.support.v7.widget.Toolbar>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+                android:id="@+id/rv_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
 
+    </LinearLayout>
 
 
     <android.support.design.widget.FloatingActionButton
@@ -29,6 +41,7 @@
         android:layout_marginRight="32dp"
         android:src="@drawable/ic_add_white_24dp"
         android:elevation="6dp"
+        android:visibility="gone"
         app:pressedTranslationZ="12dp">
 
     </android.support.design.widget.FloatingActionButton>

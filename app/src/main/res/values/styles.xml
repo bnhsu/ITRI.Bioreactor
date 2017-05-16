@@ -1,6 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
+    <style name="full_screen_dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
 
     <style name="LabelStyle" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@android:color/white</item>
@@ -155,5 +162,21 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="stepViewToolbar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionMenuTextColor">@android:color/holo_red_light</item>
+        <item name="actionMenuTextAppearance">@style/toolbar_menu_go</item>
+    </style>
+    <style name="toolbar_menu_go">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#AA92ef</item>
+        <item name="colorPrimaryDark">#7868F3</item>
+        <item name="colorAccent">#FFF001</item>
+        <item name="titleTextColor">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="actionMenuTextAppearance">@style/toolbar_menu_go</item>
+    </style>
 
 </resources>

@@ -14,10 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import org.itri.bioreactor2.R;
+import org.itri.bioreactor2.autocontrol.component.Script;
+import org.itri.bioreactor2.autocontrol.component.step;
 import org.itri.bioreactor2.ui.adpater.AutoControlCardAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 
 public class AutoControlListFragment extends Fragment {
@@ -35,7 +39,7 @@ public class AutoControlListFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_autocontrollist, container, false);
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
-
+        Log.d("debugcrash"," onCreateView AutoControlListFragment");
         listRaw();
 
         // use this setting to improve performance if you know that changes
@@ -89,6 +93,7 @@ public class AutoControlListFragment extends Fragment {
 
     private void onFloatingButton(final View view, final AutoControlCardAdapter adapter){
         FloatingActionButton addCard = (FloatingActionButton)view.findViewById(R.id.fab);
+        Log.d("debugcrash"," on onFloatingButton");
         addCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +105,7 @@ public class AutoControlListFragment extends Fragment {
 
     // list all the conrtol file in the directory
     public void listRaw() {
+        Log.d("debugcrash"," on listRaw");
         String path = getActivity().getExternalFilesDir(null).getAbsolutePath();
         File[] files = new File(path).listFiles();
         for (File file : files) {
@@ -111,13 +117,33 @@ public class AutoControlListFragment extends Fragment {
     }
 
     private void jsonCreate(String fileName) throws IOException {
+        /*
         File newJson = new File(getActivity().getExternalFilesDir(null).getAbsolutePath()
                 + File.separator + fileName +".json");
         newJson.createNewFile();
+        */
+
+        Script newScript = new Script(getActivity(), fileName);
+        step firstStep = new step();
+
+        firstStep.setStepTitle("Step 1");
+        firstStep.setStepDescription( "Description");
+        Dictionary<String,String> setto = new Hashtable<>();
+        Dictionary<String,String> endif = new Hashtable<>();
+        setto.put("Pump1", "0");
+        //setto.
+        endif.put("TIME","300000");
+
+        firstStep.setStepSetTo(setto);
+        firstStep.setStepEndIf(endif);
+
+        newScript.addNewStep(firstStep);
+        newScript.wirteScript();
+
     }
 
     private void customDialog(){
-        final View item = LayoutInflater.from(getActivity()).inflate(R.layout.addautocontrol_dialog, null);
+        final View item = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_addautocontrol, null);
         new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_Alert)
                 .setTitle("Enter New AutoControl Name")
                 .setView(item)
@@ -141,6 +167,7 @@ public class AutoControlListFragment extends Fragment {
                     }
                 }).show();
     }
+
 
 }
 
