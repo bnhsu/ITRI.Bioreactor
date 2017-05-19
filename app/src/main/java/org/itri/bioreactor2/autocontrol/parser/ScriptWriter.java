@@ -81,30 +81,29 @@ public class ScriptWriter {
 
     private void writeSetto(JsonWriter writer, step Step) throws IOException {
         writer.beginObject();
-        for(Enumeration<Object> v = Step.getStepSetTo().keys(); v.hasMoreElements();){
-
+        for(Enumeration<String> v = Step.getStepSetTo().keys(); v.hasMoreElements();){
             key = v.nextElement();
             if(key.toString().contains("Pump1")) {
-                writer.name("Pump1").value(Step.getStepSetTo().get(key.toString()).toString());
+                writer.name("Pump1").value(Step.getStepSetTo().get(key.toString()));
             }
             else if(key.toString().contains("Pump2")){
-                writer.name("Pump2").value(Step.getStepSetTo().get(key.toString()).toString());
+                writer.name("Pump2").value(Step.getStepSetTo().get(key.toString()));
             }
             else if(key.toString().contains("Pump3")){
-                writer.name("Pump3").value(Step.getStepSetTo().get(key.toString()).toString());
+                writer.name("Pump3").value(Step.getStepSetTo().get(key.toString()));
             }
             else if(key.toString().contains("Stir")){
-                writer.name("Stir").value(Step.getStepSetTo().get(key.toString()).toString());
+                writer.name("Stir").value(Step.getStepSetTo().get(key.toString()));
             }
             else if(key.toString().contains("TMP")){
 
-                writer.name("tmp").value(Step.getStepSetTo().get(key.toString()).toString());
+                writer.name("tmp").value(Step.getStepSetTo().get(key.toString()));
             }
             else if(key.toString().contains("pH")){
-                writer.name("pH").value(Step.getStepSetTo().get(key.toString()).toString());
+                writer.name("pH").value(Step.getStepSetTo().get(key.toString()));
             }
             else if(key.toString().contains("DO")){
-                writer.name("DO").value(Step.getStepSetTo().get(key.toString()).toString());
+                writer.name("DO").value(Step.getStepSetTo().get(key.toString()));
             }
         }
 
@@ -113,14 +112,13 @@ public class ScriptWriter {
 
     private void writerEndif(JsonWriter writer, step newStep) throws IOException{
         writer.beginObject();
-        for(Enumeration<Object> v = newStep.getStepEndIf().keys(); v.hasMoreElements();){
-
+        for(Enumeration<String> v = newStep.getStepEndIf().keys(); v.hasMoreElements();){
             key = v.nextElement();
             if(key.toString().contains("TIME")) {
-                writer.name("TIME").value(newStep.getStepEndIf().get(key.toString()).toString());
+                writer.name("TIME").value(newStep.getStepEndIf().get(key.toString()));
             }
             else if(key.toString().contains("Pump1")){
-                writer.name("pump2").value(newStep.getStepEndIf().get(key.toString()).toString());
+                writer.name("pump2").value(newStep.getStepEndIf().get(key.toString()));
             }
         }
         writer.endObject();

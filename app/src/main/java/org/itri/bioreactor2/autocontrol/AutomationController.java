@@ -59,12 +59,12 @@ public class AutomationController  {
 */
     private void autoSetto(){
 
-        for(Enumeration<Object> v = Currentstep.getStepSetTo().keys(); v.hasMoreElements();){
+        for(Enumeration<String> v = Currentstep.getStepSetTo().keys(); v.hasMoreElements();){
             //key =  Currentstep.setTo.keys();
             //Log.d("TEST",Currentstep.setTo.get(key.toString()).toString());
             key = v.nextElement();
             if(key.toString().contains("Pump1")) {
-                goalValue = Currentstep.getStepSetTo().get(key.toString()).toString();
+                goalValue = Currentstep.getStepSetTo().get(key.toString());
                 if(pump == null) {
                     pump = new pumpAutomator(context, key.toString(), goalValue);
                 }
@@ -73,7 +73,7 @@ public class AutomationController  {
                 }
             }
             else if(key.toString().contains("pH")){
-                goalValue = Currentstep.getStepSetTo().get(key.toString()).toString();
+                goalValue = Currentstep.getStepSetTo().get(key.toString());
                 if(pHAutomator == null) {
                     pHAutomator = new pHAutomator(context, key.toString(), goalValue);
                 }else{
@@ -81,7 +81,7 @@ public class AutomationController  {
                 }
             }
             else if(key.toString().contains("DO")){
-                goalValue = Currentstep.getStepSetTo().get(key.toString()).toString();
+                goalValue = Currentstep.getStepSetTo().get(key.toString());
                 if(oxygenAutomator == null) {
                     oxygenAutomator = new oxygenAutomator(context, key.toString(), goalValue);
                 }else{
@@ -97,11 +97,11 @@ public class AutomationController  {
         this.StepList = StepList;
 //        final Iterator i = StepList.iterator();
 
-        for(Enumeration<Object> y = Currentstep.getStepEndIf().keys(); y.hasMoreElements();){
+        for(Enumeration<String> y = Currentstep.getStepEndIf().keys(); y.hasMoreElements();){
             //key = Currentstep.endIf.keys().nextElement();
             key = y.nextElement();
             if(key.toString().contains("TIME")) {
-                goalValue = Currentstep.getStepEndIf().get(key.toString()).toString();
+                goalValue = Currentstep.getStepEndIf().get(key.toString());
                 CountDownValue = Long.parseLong(goalValue);
                 CountDownTimer EndCountDownTimer = new CountDownTimer( CountDownValue,1000 ) {
                     @Override

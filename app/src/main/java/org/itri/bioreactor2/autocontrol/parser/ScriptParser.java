@@ -86,10 +86,10 @@ public class ScriptParser {
         }
 
 
+
     public Hashtable<String,String> readSetTo(JsonReader reader)throws IOException {
         String key = null;
         Hashtable<String,String> SetTo = new Hashtable<String,String>();
-
         reader.beginObject();
         while (reader.hasNext()) {
             key = reader.nextName();
@@ -97,6 +97,7 @@ public class ScriptParser {
         }
         reader.endObject();
         return SetTo;
+
     }
 
 

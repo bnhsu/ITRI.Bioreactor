@@ -5,7 +5,10 @@ import android.content.Context;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import org.itri.bioreactor2.R;
 import org.itri.bioreactor2.autocontrol.component.step;
@@ -18,25 +21,53 @@ public class EditStepDialog extends Dialog {
     private Toolbar mToolbar;
     private step mStep;
     private EditText editTitle, editDescription, editSetto, editEndif;
-    public EditStepDialog(Context context, step mStep) {
+    private Spinner spinner_pump1, spinner_stir;
+    ArrayAdapter<CharSequence> adapter, adapter_stir;
+
+
+    public EditStepDialog(Context context, final step mStep) {
         super(context, R.style.MyDialogTheme);
         this.mStep = mStep;
         setContentView(R.layout.dialog_editstep);
         editTitle = (EditText)findViewById(R.id.edit_title);
         editDescription = (EditText)findViewById(R.id.edit_description);
-        editSetto = (EditText)findViewById(R.id.edit_setto);
-        editEndif = (EditText)findViewById(R.id.edit_endif);
+        spinner_pump1 = (Spinner)findViewById(R.id.spinner_pump1);
+        spinner_stir = (Spinner)findViewById(R.id.spinner_stir);
+        adapter = ArrayAdapter.createFromResource(context, R.array.pumpArr, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner_pump1.setAdapter(adapter);
+        spinner_pump1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinner_stir.setAdapter(adapter);
+        spinner_stir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         editTitle.setText(mStep.getStepTitle());
         editDescription.setText(mStep.getStepDescription());
-        editSetto.setText(mStep.listAllSetTo());
-        editEndif.setText(mStep.listAllEndIF());
 
         setmToolbar();
         editTitle.clearFocus();
         editDescription.clearFocus();
-        editSetto.clearFocus();
-        editEndif.clearFocus();
+
 /*
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editTitle.getWindowToken(), 0);

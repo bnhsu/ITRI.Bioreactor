@@ -2,6 +2,7 @@ package org.itri.bioreactor2.autocontrol.component;
 
 import java.util.Dictionary;
 import java.util.Enumeration;
+import java.util.Hashtable;
 
 /**
  * Created by norman on 2017/2/14.
@@ -10,11 +11,13 @@ import java.util.Enumeration;
 public class step {
     private String title;
     private String description;
-    private Dictionary setTo;
-    private Dictionary endIf;
+    private Hashtable<String,String> setTo;
+    private Hashtable<String,String> endIf;
+    //private Dictionary setTo;
+    //private Dictionary endIf;
     private Object key;
 
-    public step(String title, String description, Dictionary setTo, Dictionary endIf){
+    public step(String title, String description, Hashtable<String,String> setTo, Hashtable<String,String> endIf){
         setStepTitle(title);
         setStepDescription(description);
         setStepSetTo(setTo);
@@ -28,10 +31,10 @@ public class step {
     public String getStepDescription(){
         return description;
     }
-    public Dictionary getStepSetTo(){
+    public Hashtable<String,String> getStepSetTo(){
         return setTo;
     }
-    public Dictionary getStepEndIf(){
+    public Hashtable<String,String> getStepEndIf(){
         return endIf;
     }
 
@@ -41,16 +44,17 @@ public class step {
     public void setStepDescription(String Description){
         this.description = Description;
     }
-    public void setStepSetTo(Dictionary setTo){
+    public void setStepSetTo(Hashtable<String,String> setTo){
         this.setTo = setTo;
     }
-    public void setStepEndIf(Dictionary endIf){
+    public void setStepEndIf(Hashtable<String,String> endIf){
         this.endIf = endIf;
     }
 
     public String listAllSetTo(){
         String setToString = null;
 
+/*
         for(Enumeration<Object> v = getStepSetTo().keys(); v.hasMoreElements();){
 
             key = v.nextElement();
@@ -76,12 +80,12 @@ public class step {
                 setToString = setToString +("DO: " + getStepSetTo().get(key.toString()).toString() +" %\n");
             }
         }
-
+*/
         return setToString;
     }
     public String listAllEndIF(){
         String endIfString = null;
-
+/*
         for(Enumeration<Object> v = getStepEndIf().keys(); v.hasMoreElements();){
 
             key = v.nextElement();
@@ -107,7 +111,7 @@ public class step {
                 endIfString = endIfString +("DO:" + getStepEndIf().get(key.toString()).toString() +"\n");
             }
         }
-
+*/
         return endIfString;
     }
 

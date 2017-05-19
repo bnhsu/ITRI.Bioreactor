@@ -128,8 +128,8 @@ public class AutoControlListFragment extends Fragment {
 
         firstStep.setStepTitle("Step 1");
         firstStep.setStepDescription( "Description");
-        Dictionary<String,String> setto = new Hashtable<>();
-        Dictionary<String,String> endif = new Hashtable<>();
+        Hashtable<String,String> setto = new Hashtable<>();
+        Hashtable<String,String> endif = new Hashtable<>();
         setto.put("Pump1", "0");
         //setto.
         endif.put("TIME","300000");

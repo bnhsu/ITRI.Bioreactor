@@ -11,6 +11,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import org.itri.bioreactor2.R;
@@ -19,6 +20,7 @@ import org.itri.bioreactor2.ui.dialog.EditStepDialog;
 import org.itri.bioreactor2.ui.tools.ExpandAndCollapseViewUtil;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * Created by A20356 on 2017/4/25.
@@ -36,7 +38,9 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.StepVi
 
     public static class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView mCardView;
-        public TextView mTextTitle, mTextDescription, mTextSetTo, mTextEndIf;
+        public TextView mTextTitle, mTextDescription,
+                mTextPump1, mTextPump2, mTextPump3, mTextstir, mTextpH, mTextDO, mTextTMP, mTextEndif;
+        public TableRow tr_pump1, tr_pump2, tr_pump3, tr_stir, tr_pH, tr_do, tr_tmp;
         public LinearLayout linearLayoutDetails;
         public ImageView imageView;
         public Button button;
@@ -52,8 +56,21 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.StepVi
             mCardView = (CardView) v.findViewById(R.id.card_view);
             mTextTitle = (TextView) v.findViewById(R.id.tv_text);
             mTextDescription =  (TextView) v.findViewById(R.id.tv_detail);
-            mTextSetTo = (TextView) v.findViewById(R.id.tv_setto);
-            mTextEndIf =  (TextView) v.findViewById(R.id.tv_endif);
+            mTextPump1 = (TextView) v.findViewById(R.id.tv_pump1value);
+            mTextPump2 = (TextView) v.findViewById(R.id.tv_pump2value);
+            mTextPump3 = (TextView) v.findViewById(R.id.tv_pump3value);
+            mTextstir = (TextView) v.findViewById(R.id.tv_stirvalue);
+            mTextpH = (TextView) v.findViewById(R.id.tv_pHvalue);
+            mTextDO = (TextView) v.findViewById(R.id.tv_DOvalue);
+            mTextTMP = (TextView) v.findViewById(R.id.tv_TMPvalue);
+            mTextEndif = (TextView) v.findViewById(R.id.tv_endif);
+            tr_pump1 = (TableRow)v.findViewById(R.id.tr_pump1);
+            tr_pump2 = (TableRow)v.findViewById(R.id.tr_pump2);
+            tr_pump3 = (TableRow)v.findViewById(R.id.tr_pump3);
+            tr_stir = (TableRow)v.findViewById(R.id.tr_stir);
+            tr_pH = (TableRow)v.findViewById(R.id.tr_pH);
+            tr_do = (TableRow)v.findViewById(R.id.tr_do);
+            tr_tmp = (TableRow)v.findViewById(R.id.tr_tmp);
             linearLayoutDetails = (LinearLayout) v.findViewById(R.id.linearLayoutDetails);
             imageView = (ImageView) v.findViewById(R.id.card_header_inner_expand_btn);
             button =(Button) v.findViewById(R.id.btn_edit);
@@ -101,19 +118,47 @@ public class StepCardAdapter extends RecyclerView.Adapter<StepCardAdapter.StepVi
 
     @Override
     public void onBindViewHolder(final StepViewHolder holder, int position){
-        String Title, Description, Setto, Endif;
+        String Title, Description;
+        Hashtable<String,String> setTo;
+        Hashtable<String,String> endIf;
         final step Step = mStep.get(position);
         final step[] newStep = {new step()};
         Title = Step.getStepTitle();
         Description = Step.getStepDescription();
-        Setto = Step.listAllSetTo();
-        Endif = Step.listAllEndIF();
+        setTo = Step.getStepSetTo();
+        endIf = Step.getStepEndIf();
+        //Setto = Step.listAllSetTo();
+        //Endif = Step.listAllEndIF();
 
         holder.mTextTitle.setText(Title);
         holder.mTextDescription.setText(Description);
+        if(setTo.get("Pump1") != null) {
+            holder.tr_pump1.setVisibility(View.VISIBLE);
+            holder.mTextPump1.setText(setTo.get("Pump1"));
+        }else if(setTo.get("Pump2") != null) {
+            holder.tr_pump2.setVisibility(View.VISIBLE);
+            holder.mTextPump2.setText(setTo.get("Pump2"));
+        }else if(setTo.get("Pump3") != null) {
+            holder.tr_pump3.setVisibility(View.VISIBLE);
+            holder.mTextPump3.setText(setTo.get("Pump3"));
+        }else if(setTo.get("Stir") != null) {
+            holder.tr_stir.setVisibility(View.VISIBLE);
+            holder.mTextstir.setText(setTo.get("Stir"));
+        }else if(setTo.get("pH") != null) {
+            holder.tr_pH.setVisibility(View.VISIBLE);
+            holder.mTextpH.setText(setTo.get("pH"));
+        }else if(setTo.get("DO") != null) {
+            holder.tr_do.setVisibility(View.VISIBLE);
+            holder.mTextDO.setText(setTo.get("DO"));
+        }else if(setTo.get("TMP") != null) {
+            holder.tr_tmp.setVisibility(View.VISIBLE);
+            holder.mTextTMP.setText(setTo.get("TMP"));
+        }
+        holder.mTextEndif.setText(endIf.get("TIME"));
+        /*
         holder.mTextSetTo.setText(Setto);
         holder.mTextEndIf.setText(Endif);
-
+*/
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

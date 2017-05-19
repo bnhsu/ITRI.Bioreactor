@@ -24,6 +24,7 @@ import org.itri.bioreactor2.ui.dialog.EditStepDialog;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class StepViewFragment extends Fragment {
     String title= null;
@@ -114,10 +115,10 @@ public class StepViewFragment extends Fragment {
                 public void onClick(View v) {
                     step newStep = new step();
 
-                    String newTitle = "Enter title";
-                    String newDescription = "Enter description";
-                    Dictionary newSetto = null;
-                    Dictionary newEndif = null;
+                    String newTitle = null;
+                    String newDescription = null;
+                    Hashtable<String,String> newSetto = new Hashtable<String,String>();
+                    Hashtable<String,String> newEndif = new Hashtable<String,String>();
                     newStep.setStepTitle(newTitle);
                     newStep.setStepDescription(newDescription);
                     newStep.setStepSetTo(newSetto);

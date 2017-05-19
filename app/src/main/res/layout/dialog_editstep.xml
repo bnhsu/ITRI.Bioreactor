@@ -19,16 +19,16 @@
     <LinearLayout
         android:layout_width="700dp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_marginTop="15dp"
         android:background="@color/white"
-        android:layout_marginTop="15dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
             android:text="Title"
             android:textSize="18sp" />
 
@@ -36,15 +36,15 @@
             android:id="@+id/edit_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"/>
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp" />
 
         <TextView
             android:id="@+id/tv_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
             android:text="Description"
             android:textSize="18sp" />
 
@@ -52,45 +52,205 @@
             android:id="@+id/edit_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"/>
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp" />
 
-        <TextView
-            android:id="@+id/tv_setto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:text="Goal Value"
-            android:textSize="18sp" />
-
-        <Spinner
-            android:id="@+id/spinner"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/edit_setto"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="300dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"/>
+            android:orientation="vertical"
+            android:stretchColumns="*">
 
-        <TextView
-            android:id="@+id/tv_endif"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:text="Run Time"
-            android:textSize="18sp" />
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-        <EditText
-            android:id="@+id/edit_endif"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"/>
+                <TextView
+                    android:id="@+id/tv_setto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Goal Value"
+                    android:textSize="18sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10px">
+
+                <TextView
+                    android:id="@+id/Pump1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pump 1" />
+
+                <Spinner
+                    android:id="@+id/spinner_pump1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/pumpArr" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10px"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_Pump2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pump 2" />
+
+                <Spinner
+                    android:id="@+id/spinner_pump2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/pumpArr" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:padding="10px">
+
+                <TextView
+                    android:id="@+id/tv_Pump3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pump 3" />
+
+                <Spinner
+                    android:id="@+id/spinner_pump3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:entries="@array/pumpArr" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10px">
+
+                <TextView
+                    android:id="@+id/tv_stir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Stir" />
+
+                <Spinner
+                    android:id="@+id/spinner_stir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:entries="@array/stirArr" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10px">
+
+                <TextView
+                    android:id="@+id/tv_pH"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="pH" />
+
+                <EditText
+                    android:id="@+id/et_pH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Enter 0~14"
+                    android:inputType="number"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10px">
+
+                <TextView
+                    android:id="@+id/tv_DO"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DO" />
+
+                <EditText
+                    android:id="@+id/et_DO"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Enter 0~100"
+                    android:inputType="number"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10px">
+                <TextView
+                    android:id="@+id/tv_TMP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Temperature" />
+
+                <EditText
+                    android:id="@+id/et_TMP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Enter 20~60"
+                    android:inputType="number"
+                    android:textSize="12sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_endif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Run Time"
+                    android:textSize="18sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10px">
+
+                <TextView
+                    android:id="@+id/tv_TIME"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Time" />
+
+                <EditText
+                    android:id="@+id/et_TIME"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="second"
+                    android:inputType="number"
+                    android:textSize="12sp" />
+            </TableRow>
+        </TableLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>
