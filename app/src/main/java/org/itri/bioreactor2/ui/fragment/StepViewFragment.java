@@ -1,6 +1,7 @@
 package org.itri.bioreactor2.ui.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import org.itri.bioreactor2.R;
 import org.itri.bioreactor2.autocontrol.AutomationController;
 import org.itri.bioreactor2.autocontrol.component.Script;
 import org.itri.bioreactor2.autocontrol.component.step;
+import org.itri.bioreactor2.ui.StepEditorActivity;
 import org.itri.bioreactor2.ui.adpater.StepCardAdapter;
 import org.itri.bioreactor2.ui.dialog.EditStepDialog;
 
@@ -125,11 +127,13 @@ public class StepViewFragment extends Fragment {
                     newStep.setStepEndIf(newEndif);
                     //int position = Step.size()+1;
 
-                    Step.add(newStep);
+                    Intent StepEditor = new Intent();
+                    StepEditor.setClass(getActivity(), StepEditorActivity.class);
+                    startActivity(StepEditor);
 
-                    EditStepDialog editStepDialog = new EditStepDialog(getActivity(), newStep);
-                    editStepDialog.show();
-                    editStepDialog.getEditStep();
+                    //EditStepDialog editStepDialog = new EditStepDialog(getActivity(), newStep);
+                    //editStepDialog.show();
+                    //Step.add(editStepDialog.getEditStep());
 
                     adapter.notifyItemInserted(Step.size());
 

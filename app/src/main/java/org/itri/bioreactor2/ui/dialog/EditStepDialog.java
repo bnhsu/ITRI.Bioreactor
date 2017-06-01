@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import org.itri.bioreactor2.R;
 import org.itri.bioreactor2.autocontrol.component.step;
 
+import java.util.Hashtable;
+
 /**
  * Created by A20356 on 2017/5/11.
  */
@@ -20,26 +22,32 @@ import org.itri.bioreactor2.autocontrol.component.step;
 public class EditStepDialog extends Dialog {
     private Toolbar mToolbar;
     private step mStep;
+    private Hashtable<String, String> setto, endif;
     private EditText editTitle, editDescription, editSetto, editEndif;
     private Spinner spinner_pump1, spinner_stir;
-    ArrayAdapter<CharSequence> adapter, adapter_stir;
+    ArrayAdapter<CharSequence> pump_adapter, adapter_stir;
 
 
     public EditStepDialog(Context context, final step mStep) {
         super(context, R.style.MyDialogTheme);
         this.mStep = mStep;
+        setto =  new Hashtable<String,String>();
+        endif =  new Hashtable<String,String>();
         setContentView(R.layout.dialog_editstep);
         editTitle = (EditText)findViewById(R.id.edit_title);
         editDescription = (EditText)findViewById(R.id.edit_description);
         spinner_pump1 = (Spinner)findViewById(R.id.spinner_pump1);
         spinner_stir = (Spinner)findViewById(R.id.spinner_stir);
-        adapter = ArrayAdapter.createFromResource(context, R.array.pumpArr, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        spinner_pump1.setAdapter(adapter);
+        pump_adapter = ArrayAdapter.createFromResource(context, R.array.pumpArr, android.R.layout.simple_spinner_item);
+        pump_adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        adapter_stir = ArrayAdapter.createFromResource(context, R.array.stirArr, android.R.layout.simple_spinner_item);
+        adapter_stir.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
+        spinner_pump1.setAdapter(pump_adapter);
         spinner_pump1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                setto.put("Pump1", parent.getSelectedItem().toString());
             }
 
             @Override
@@ -47,11 +55,13 @@ public class EditStepDialog extends Dialog {
 
             }
         });
-        spinner_stir.setAdapter(adapter);
+        spinner_stir.setAdapter(adapter_stir);
         spinner_stir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                if(parent.getSelectedItem().toString() != null){
+                    setto.put("Stir", parent.getSelectedItem().toString());
+                }
             }
 
             @Override
@@ -95,6 +105,7 @@ public class EditStepDialog extends Dialog {
                     case R.id.menu_save:
                         mStep.setStepTitle(editTitle.getText().toString());
                         mStep.setStepDescription(editDescription.getText().toString());
+                        mStep.setStepSetTo(setto);
                         dismiss();
                         // Save the step edit
                         //Toast.makeText(mContext, "Edit is clicked!", Toast.LENGTH_SHORT).show();

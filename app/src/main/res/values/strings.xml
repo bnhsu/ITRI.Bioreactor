@@ -236,5 +236,6 @@
         <item>-250</item>
         <item>-255</item>
     </string-array>
+    <string name="title_activity_step_editor">StepEditor</string>
 
 </resources>
